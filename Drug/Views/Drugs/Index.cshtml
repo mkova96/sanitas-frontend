@@ -1,0 +1,106 @@
+﻿@model PaginatedList2<DrugData.Models.Medication>
+
+<div>
+    <text id="lol">Proizvodi </text>
+
+        <button class="dropdown" id="ppp">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><text>Filtriraj po bolesti</text><span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+                <form asp-controller="Drugs" asp-action="Index" method="get" style="text-align:center">
+                    @{
+
+                        HashSet
+                        <Disease>
+                            genres = new HashSet<Disease>
+                                ();
+                        foreach (var album in ViewBag.Model)
+                        {
+                            foreach (var genre in album.DrugDiseases)
+                            {
+                                genres.Add(genre.Disease);
+
+                            }
+
+                        }
+
+                        foreach (var g in genres.OrderBy(x => x.DiseaseName))
+                        {
+                            <li><input type="checkbox" name="diseases" value="@g.DiseaseName" />@g.DiseaseName</li>
+                        }
+                        <li class="divider"></li>
+
+                        <input type="submit" name="submit" value="Filtriraj" />
+                    }
+
+                </form>
+
+
+            </ul>
+        </button>
+</div>
+
+
+
+
+<div class="row marginTop" id="zz">
+    @foreach (var drink in Model)
+    {
+        @Html.Partial("DrugSummary", drink)
+
+        <script>
+        $(document).ready(function() {
+    $('#postBtn').click(function() {
+        var list = [];
+        $('#formId input:checked').each(function() {
+            list.push(this);
+        });
+        // now names contains all of the names of checked checkboxes
+        // do something with it for excamle post with ajax
+        $.ajax({
+            url: '@Url.Action("Index","Drugs")',
+            type: 'POST',
+            data: { Parameters: list},
+            success: function (result) {
+                alert("success")!
+            },
+            error: function (result) {
+                alert("error!");
+            }
+        });   //end ajax
+    });
+});
+        </script>
+    }
+</div>
+
+
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex - 1)"
+   asp-route-currentCategory="@ViewData["CurrentCategory"]"
+   class="btn btn-default @prevDisabled">
+    ◄
+</a>
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex + 1)"
+   asp-route-currentCategory="@ViewData["CurrentCategory"]"
+   class="btn btn-default @nextDisabled">
+    ►
+</a>
+
+<style>
+    #mad {
+        display: inline-block;
+        margin: 0;
+    }
+    #lol {
+        font-size: 45px;
+    }
+
+
+</style>

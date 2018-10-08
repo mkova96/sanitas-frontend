@@ -1,0 +1,148 @@
+﻿@model DrugData.Models.ViewModels.EditDrugViewModel
+
+<form asp-action="Update" asp-route-id="@Model.DrugId" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    @if (@ViewData["Success"] != null)
+    {
+        <div class="alert alert-success">Lijek spremljen</div>
+    }
+    <h2>Uredi</h2>
+
+    <div class="form-group">
+        <label asp-for="DrugName">Naziv</label>
+        <input asp-for="DrugName" id="da" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DateProduced">Datum proizvodnje</label>
+        <input asp-for="DateProduced" class="form-control" />
+    </div>
+    <div class="form-group">
+        @if (Model.Drug.DateExpires <= DateTime.Now)
+        {
+            <label asp-for="DateProduced"><font color="red">Datum isteka valjanosti</font></label>
+
+        }
+        else
+        {
+            <label asp-for="DateExpires">Datum isteka valjanosti</label>
+
+        }
+        <input asp-for="DateExpires" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Price">Cijena</label>
+        <input asp-for="Price" id="da" class="form-control" />
+        <div class="form-group">
+            <label asp-for="CurrencyId">Valuta</label>
+            <select asp-for="CurrencyId" asp-items="@(new SelectList((IEnumerable<Currency>) @ViewData["Currencies"],"CurrencyId", "CurrencyName"))" class="form-control"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="ImagePath">Poveznica na sliku</label>
+        <input asp-for="ImagePath" id="da" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Usage">Uporaba</label>
+        <input asp-for="Usage" id="da" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="PackageId">Pakiranje</label>
+        <select asp-for="PackageId" asp-items="@(new SelectList((IEnumerable<Package>) @ViewData["Packages"],"PackageId", "PackageData"))" class="form-control"></select>
+    </div>
+    <div class="form-group">
+
+        @if (Model.Drug.Quantity < 5)
+        {
+            <label asp-for="Quantity"><font color="red">Količina</font></label>
+        }
+        else
+        {
+            <label asp-for="Quantity">Količina</label>
+        }
+        <input asp-for="Quantity" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="CategoryIds">Bolesti</label>
+        <select multiple asp-for="CategoryIds" asp-items="@(new SelectList((IEnumerable<Disease>) @ViewData["Categories"], "DiseaseId", "DiseaseName"))" class="form-control"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="SideEffectIds">Moguće nuspojave</label>
+        <select multiple asp-for="SideEffectIds" asp-items="@(new SelectList((IEnumerable<SideEffect>) @ViewData["SideEffects"], "SideEffectId", "SideEffectName"))" class="form-control"></select>
+    </div>
+    <div class="col">
+        <h5><b>Zamjenski proizvodi?</b></h5>
+        <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <div class="form-check form-check-inline">
+                        @Html.RadioButtonFor(model => model.SubstitutionType, "existing", new { Class = "form-check-input", Id = "ExistingRadio", Name = "SubstitutionType" })
+                        <label class="form-check-label" for="ExistingRadio">Da</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-check form-check-inline">
+                        @Html.RadioButtonFor(model => model.SubstitutionType, "new", new { Class = "form-check-input", Id = "NewRadio", Name = "SubstitutionType" })
+                        <label class="form-check-label" for="NewRadio">Ne</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" id="drugSelectSubstitution">
+            <label asp-for="DrugIds">Zamjenski proizvodi</label>
+            <select multiple asp-for="DrugIds" asp-items="@(new SelectList((IEnumerable<Medication>) ViewData["Drugs"], "DrugId", "DrugName"))" class="form-control"></select>
+        </div>
+        <div class="form-group" id="drugCreateSubstitution" style="display: none">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ManufacturerId">Proizvođač</label>
+        <select asp-for="ManufacturerId" asp-items="@(new SelectList((IEnumerable<Manufacturer>) @ViewData["Manufacturers"],"ManufacturerId", "ManufacturerName"))" class="form-control"></select>
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Spremi</button>
+        <a asp-action="Index">
+            <button type="button" class="btn btn-secondary">Odustani</button>
+        </a>
+    </div>
+
+</form>
+
+
+<style>
+    #da {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        margin-left: 35px display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        var $registerRadios = $('input[name="SubstitutionType"]');
+        if ($registerRadios.length) {
+            showSubstitutionView();
+            $registerRadios.on('change', function (e) {
+                showSubstitutionView();
+            })
+        }
+    });
+
+
+    function showSubstitutionView() {
+        var value = $('input[name="SubstitutionType"]:checked').first().val();
+        if (value === "new") {
+            $('#drugCreateSubstitution').show();
+            $('#drugSelectSubstitution').hide();
+        } else {
+            $('#drugCreateSubstitution').hide();
+            $('#drugSelectSubstitution').show();
+        }
+    }
+
+</script>

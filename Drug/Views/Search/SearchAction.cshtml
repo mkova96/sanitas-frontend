@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Rezultati pretrage";
+}
+@model SearchActionViewModel
+<h1>Rezultati</h1>
+<hr />
+
+@if (Model != null && Model.Drugs.Any())
+{
+    <ul class="list-group">
+
+        @if (Model.Drugs != null && Model.Drugs.Any())
+        {
+            foreach (var c in Model.Drugs)
+            {
+        <h4>
+            <a asp-controller="Drugs" asp-action="Show" asp-route-id="@c.DrugId">
+                @c.DrugName @c.Package.IndividualSize@c.Package.Measure.MeasureName
+            </a>
+        </h4>
+                
+            }
+        }
+    </ul>
+}
+else
+{
+    <h4>Nema rezultata o postavljenom upitu.</h4>
+}

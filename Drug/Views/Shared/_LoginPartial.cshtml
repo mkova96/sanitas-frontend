@@ -1,0 +1,82 @@
+﻿@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+
+@if (SignInManager.IsSignedIn(User))
+{ <ul class="nav navbar-nav navbar-right">
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img src="~/images/user.png" alt="" width="22" height="22" /> Moj profil<span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu" id="robo">
+            <li><a asp-controller="Manage" asp-action="Index">Uredi profil</a></li>
+            <li><a asp-controller="Manage" asp-action="ChangePassword">Promijeni lozinku</a></li>
+            <li><a asp-controller="Message" asp-action="Index">Poruke</a></li>
+            <li>
+                <div id="poly">
+                    <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+
+                        <button type="submit" class="btn btn-link nav-link"><text id="moly">Odjava</text></button>
+                    </form>
+                </div>
+                
+
+            </li>                
+        </ul>
+    </li>
+    @if (User.IsInRole("Admin"))
+    {
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu" id="robo">
+                <li><a asp-controller="Drug" asp-action="Index">Proizvodi</a></li>
+                <li><a asp-controller="Doctor" asp-action="Index">Ljekarnici</a></li>
+                <li><a asp-controller="User" asp-action="Index">Korisnici</a></li>
+                <li><a asp-controller="Admin" asp-action="Index">Admini</a></li>
+                <li><a asp-controller="SideEffect" asp-action="Index">Nuspojave</a></li>
+                <li><a asp-controller="Disease" asp-action="Index">Bolesti</a></li>
+                <li><a asp-controller="Manufacturer" asp-action="Index">Proizvođači</a></li>
+                <li><a asp-controller="Currency" asp-action="Index">Valute</a></li>
+                <li><a asp-controller="Package" asp-action="Index">Pakiranja</a></li>
+
+
+            </ul>
+        </li>
+
+    }
+    else if (User.IsInRole("Owner"))
+    {
+        <li class="dropdown" >
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Vlasnik<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu" id="robo">
+                <li><a asp-controller="Admin" asp-action="Index">Admini</a></li>
+            </ul>
+        </li>
+
+    }
+
+
+</ul>  
+}
+    else
+    {
+    <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item"><a asp-controller="Account" asp-action="Register" class="nav-link">Registracija</a></li>
+        <li class="nav-item"><a asp-controller="Account" asp-action="Login" class="nav-link">Prijava</a></li>
+    </ul>
+    }
+
+    <style>
+
+
+        #robo {
+            height: auto !important;
+            overflow: visible !important;
+        }
+        #poly{
+            padding:3px;
+        }
+        #moly {
+            font-size: 17px;
+            color: #f2f2f2;
+            
+        }
+    </style>

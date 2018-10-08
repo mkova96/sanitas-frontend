@@ -1,0 +1,348 @@
+﻿@model Medication
+<div class="row">
+    <div class="column1">
+        <div> </div>
+        @if (User.IsInRole("Admin"))
+        {
+        <div>
+            <center><a asp-controller="Drug" asp-action="Index" asp-route-searchString="@Model.DrugName.ToString()"><img src=@Model.ImagePath class="imageCell" height="200" /></a></center>
+        </div>
+
+        }
+        else
+        {
+            <div>
+                <center><img src=@Model.ImagePath class="imageCell" height="200" /></center>
+            </div>
+
+        }
+        
+        <div>
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                <center id="xxx">
+                    <p class="btn btn-group">
+                        <a class="btn btn-success" id="cartButton" asp-controller="Account" asp-action="Login">
+                            Dodaj u košaricu
+                        </a>
+                    </p>
+                </center>
+
+
+            }
+            else
+            {
+                if (User.IsInRole("User"))
+                {
+                    <center>
+                        <p class="btn btn-group">
+                            <a class="btn btn-success" id="cartButton" asp-controller="Cart" asp-action="AddToCart" asp-route-drugId="@Model.DrugId">
+                                Dodaj u košaricu
+                            </a>
+
+                        </p>
+                    </center>
+                }
+
+            }
+
+        </div>
+    </div>
+    <div class="column2">
+        <div>
+            <h1><b><center>@Model.DrugName @Model.Package.IndividualSize @Model.Package.Measure.MeasureName</center></b></h1>
+        </div>
+        <h1></h1>
+        <div>
+            <h4>      Cijena:<b> @Model.Price @Model.Currency.CurrencyName</h4></b>
+        </div>
+        <h4></h4>
+
+        <div>
+            <h4>      Datum proizvodnje:<b> @Model.DateProduced.Date.ToString("dd/MM/yyyy")</b></h4>
+        </div>
+        <h4></h4>
+
+        <div>
+            <h4>      Datum isteka valjanosti:<b> @Model.DateExpires.Date.ToString("dd/MM/yyyy")</b></h4>
+        </div>
+        <h4></h4>
+
+        <div>
+            <h4>      Proizvođač:<b> @Model.Manufacturer.ManufacturerName</b></h4>
+        </div>
+        <h4></h4>
+
+        <div>
+            <h4>      Pakiranje:<b> @Model.Package.PackageType</b></h4>
+        </div>
+        <h4></h4>
+
+        @if (Model.Package.Quantity > 1)
+        {
+            <div>
+                <h4>      Stavki unutar pakiranja:<b> @Model.Package.Quantity</b></h4>
+            </div>
+
+        }
+        <h4></h4>
+
+        <div>
+            <h4>      Način uporabe:<b> @Model.Usage</b></h4>
+        </div>
+
+
+    </div>
+    <div class="column2">
+        <h1> </h1>
+        <div>
+            <h4>Primjenjivo za bolesti:</h4>
+        </div>
+        <div>
+            @foreach (var x in Model.DrugDiseases)
+            {
+
+                <h4> <b>    •@x.Disease.DiseaseName</b></h4>
+            }
+        </div>
+        <br /><h4></h4>
+
+        <div>
+            <h4>
+                Moguće nuspojave:
+            </h4>
+        </div>
+        <div>
+            @foreach (var x in Model.DrugSideEffects)
+            {
+                <h4> <b>    •@x.SideEffect.SideEffectName</b></h4>
+            }
+        </div>
+    </div>
+</div>
+
+@if (Model.Substitutions.Count > 0)
+{
+    <h2>Zamjenski proizvodi</h2>
+    <div class="row marginTop" id="rex">
+        @foreach (var x in Model.Substitutions)
+        {
+            <div class="col-sm-4 col-lg-4 col-md-4">
+                <div class="thumbnail">
+                    <img src="@x.ImagePath" id="poppy" />
+                    <div class="caption">
+                        <h3>
+                            <center><a asp-controller="Drugs" asp-action="Show" asp-route-id="@x.DrugId">@x.DrugName </a></center>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+}
+else
+{
+    <h3>Trenutno nema zamjenskih proizvoda</h3>
+}
+
+@if (Model.Comments.Count > 0)
+{
+    @if (Context.User.Identity.IsAuthenticated == false)
+    {
+        <div>
+            <h2>
+                Komentari    <a asp-controller="Account" asp-action="Login" class="btn btn-warning btn-sm">Komentiraj</a>
+            </h2>
+        </div>
+
+    }
+    else
+    {
+        if (Context.User.IsInRole("Admin") || Context.User.IsInRole("Owner") || Context.User.IsInRole("Doctor"))
+        {
+            <div>
+                <h2>
+                    Komentari 
+                </h2>
+            </div>
+        }
+        else
+        {
+            <div>
+                <h2>
+                    Komentari    <a asp-controller="Drug" asp-action="AddComment" asp-route-id="@Model.DrugId" class="btn btn-warning btn-sm">Komentiraj</a>
+                </h2>
+            </div>
+
+
+        }
+
+    }
+
+    @foreach (var x in Model.Comments)
+    {
+        <div class="row">
+            <div class="column1">
+                <div>
+                    <center><img src="~/images/user.png" class="imageCell" height="80px" /></center>
+                </div>
+                @if (User.IsInRole("Admin"))
+                {
+                    <div>
+                        <center><h5><b><a asp-controller="User" asp-action="Index" asp-route-searchString="@x.User.Email.ToString()">@x.User.FullName</a></b></h5></center>
+                    </div>
+
+                }
+                else
+                {
+                    <div>
+                        <center><h5><b>@x.User.FullName</b></h5></center>
+                    </div>
+                }
+
+                <div>
+                    <center><h5>Član od: <b>@x.User.UserDate.ToString("dd/MM/yyyy")</b></center>
+                </div>
+
+            </div>
+            <div class="column3">
+                <div>
+                    <h4>@x.Content</h4>
+                </div>
+            </div>
+            <div class="column4">
+                @if (Context.User.Identity.Name == x.User.Email)
+                {
+                    <div>
+                        <a asp-controller="Drug" asp-action="EditComment" asp-route-id1="@x.CommentId" asp-route-id2="@Model.DrugId" class="glyphicon glyphicon-pencil text-info remove"></a>
+                    </div>
+                    <div><h8> </h8></div>
+                    <form asp-controller="Drug" asp-action="DeleteComment" asp-route-id1="@x.CommentId" asp-route-id2="@Model.DrugId"
+                          method="POST" style="display: inline-block" >
+                        <button type="submit" class="glyphicon glyphicon-trash text-danger remove" id="leka"></button>
+                    </form>
+
+                }
+                else if (User.IsInRole("Admin"))
+                {
+                    <form asp-controller="Drug" asp-action="DeleteComment" asp-route-id1="@x.CommentId" asp-route-id2="@Model.DrugId"
+                          method="POST" style="display: inline-block">
+                        <button type="submit" class="glyphicon glyphicon-trash text-danger remove" id="leka"></button>
+                    </form>
+
+                }
+            </div>
+        </div>
+
+    }
+}
+else
+{
+    @if (Context.User.Identity.IsAuthenticated == false)
+    {
+        <div>
+            <h3>
+                Trenutno nema komentara    <a asp-controller="Account" asp-action="Login" class="btn btn-warning btn-sm">Komentiraj</a>
+            </h3>
+        </div>
+
+    }
+    else
+    {
+        @if (Context.User.IsInRole("User"))
+        {
+            <div>
+                <h3>
+                    Trenutno nema komentara    <a asp-controller="Drug" asp-action="AddComment" asp-route-id="@Model.DrugId" class="btn btn-warning btn-sm">Komentiraj</a>
+                </h3>
+            </div>
+        }
+        else
+        {
+            <div>
+                <h3>
+                    Trenutno nema komentara 
+                </h3>
+            </div>
+        }
+    }
+}
+
+
+
+
+
+
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    #rex {
+        width: 80%;
+    }
+
+    /* Create two equal columns that floats next to each other */
+    .column {
+        float: left;
+        width: 45%;
+        padding: 10px;
+    }
+
+    .column1 {
+        float: left;
+        width: 30%;
+        padding: 10px;
+    }
+
+    .column2 {
+        float: left;
+        width: 35%;
+        padding: 10px;
+    }
+
+    .column3 {
+        float: left;
+        width: 40%;
+        padding: 10px;
+    }
+
+    .column4 {
+        float: left;
+        width: 20%;
+        padding: 10px;
+    }
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    #poppy {
+        height: 150px
+    }
+
+
+    #xxx{
+        padding-top:20px
+    }
+    #leka {
+        background-color: Transparent;
+        background-repeat: no-repeat;
+        border: none;
+        cursor: pointer;
+        overflow: hidden;
+        outline: none;
+    }
+
+    .glyphicon.glyphicon-trash {
+        font-size: 25px;
+    }
+    .glyphicon.glyphicon-pencil {
+        font-size: 25px;
+    }
+</style>

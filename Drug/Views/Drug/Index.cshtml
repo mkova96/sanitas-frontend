@@ -1,0 +1,200 @@
+﻿@model PaginatedList<DrugData.Models.Medication>
+
+<h2>Proizvodi</h2>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Pretraži: <input type="text" id="da" name="SearchString" value="@ViewData["currentFilter"]" />
+            <input type="submit" value="Pretraži" class="btn btn-default" /> |
+            <a asp-action="Index">Cijeli popis</a>
+        </p>
+    </div>
+</form>
+<table class="table table-striped table-bordered table-sm">
+    <tr>
+        <th class="text-center">
+            <a asp-action="Index" asp-route-sortOrder="@ViewData["IdSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">ID</a>
+        </th>
+        <th class="text-center"><a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Naziv</a></th>
+        <th class="text-center">
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr data-toggle="collapse" id="xman" data-target="@("#" + item.DrugId.ToString())" style="cursor:pointer;">
+            <td class="text-center">@item.DrugId</td>
+            <td class="text-center">@item.DrugName @item.Package.IndividualSize@item.Package.Measure.MeasureName</td>
+            <td class="text-center">
+                <a asp-action="Edit" asp-route-id="@item.DrugId" class="btn btn-warning btn-sm">✎</a>
+                <form asp-action="Delete" asp-route-id="@item.DrugId" asp-route-page="@(Model.PageIndex)"
+                      method="POST" style="display: inline-block">
+                    <button type="submit" class="btn btn-danger btn-sm">✘</button>
+                </form>
+            </td>
+        <tr></tr>
+        <tr class="bg-light">
+            <td colspan="8" style="padding:0;margin:0;">
+                <div id="@item.DrugId" class="subRow collapse">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="column1">
+                                <div>
+                                    <img src=@item.ImagePath class="imageCell" height="150" />
+                                </div>
+                            </div>
+                            <div class="column2">
+                                <div>
+                                    <h1><b><center>@item.DrugName @item.Package.IndividualSize@item.Package.Measure.MeasureName</center></b></h1>
+                                </div>
+                                <div><h3></h3></div>
+                                <div>
+                                    <h4>      Cijena:<b> @item.Price @item.Currency.CurrencyName</b></h4>
+                                </div>
+                                <div>
+                                    <h4>      Datum proizvodnje:<b> @item.DateProduced.Date.ToString("dd/MM/yyyy")</b></h4>
+                                </div>
+                                <div>
+                                    <h4>      Datum isteka valjanosti:<b> @item.DateExpires.Date.ToString("dd/MM/yyyy")</b></h4>
+                                </div>
+                                <div>
+                                    <h4>      Proizvođač:<b> @item.Manufacturer.ManufacturerName</b></h4>
+                                </div>
+                                <div>
+                                    <h4>      Pakiranje:<b> @item.Package.PackageType</b></h4>
+                                </div>
+                                @if (item.Package.Quantity > 1)
+                                {
+                                <div>
+                                    <h4>      Stavki unutar pakiranja:<b> @item.Package.Quantity</b></h4>
+                                </div>
+
+                                }
+                                <div>
+                                    <h4>      Način uporabe:<b> @item.Usage</b></h4>
+                                </div>
+
+
+                            </div>
+                            <div class="column2">
+                                <h1> </h1>
+                                <div>
+                                    <h4>Primjenjivo za bolesti:</h4>
+                                </div>
+                                <div>
+                                    @foreach (var x in item.DrugDiseases)
+                                    {
+
+                                        <h4> <b>    •@x.Disease.DiseaseName</b></h4>
+                                    }
+                                </div>
+                                <br /><h4></h4>
+
+                                <div>
+                                    <h4>
+                                        Moguće nuspojave:
+                                    </h4>
+                                </div>
+                                <div>
+                                    @foreach (var x in item.DrugSideEffects)
+                                    {
+                                        <h4> <b>    •@x.SideEffect.SideEffectName</b></h4>
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tr>
+    }
+</table>
+
+<div class="text-center">
+    <a asp-action="Add" class="btn btn-primary">Novi proizvod</a>
+</div>
+
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-page="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    ◄
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-page="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    ►
+</a>
+
+
+<style>
+    #xman {
+        background-color: white;
+        color: black;
+        cursor: pointer;
+        padding: 30px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+    }
+
+        .active, #xman:hover {
+            background-color: #c5c5c5;
+        }
+
+    #cman {
+        padding: 0 14px;
+        display: none;
+        overflow: hidden;
+        background-color: #ff0000;
+    }
+    #da {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+</style>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    /* Create two equal columns that floats next to each other */
+    .column {
+        float: left;
+        width: 35%;
+        padding: 10px;
+    }
+
+    .column1 {
+        float: left;
+        width: 20%;
+        padding: 30px;
+    }
+    .column2 {
+        float: left;
+        width: 40%;
+        padding: 30px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+</style>
+

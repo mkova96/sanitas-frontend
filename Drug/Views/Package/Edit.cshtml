@@ -1,0 +1,42 @@
+﻿@model DrugData.Models.ViewModels.EditPackageViewModel
+
+<form asp-action="Update" asp-route-id="@Model.PackageId" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <h2>Uredi</h2>
+    <div class="form-group">
+        <label asp-for="PackageType">Tip pakiranja </label>
+        <input asp-for="PackageType" id="da" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Quantity">Količina unutar pakiranja </label>
+        <input asp-for="Quantity" id="da" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="IndividualSize">Pojedinačna veličina</label>
+        <input asp-for="IndividualSize" id="da" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MeasureId">Mjerna jedinica</label>
+        <select asp-for="MeasureId" asp-items="@(new SelectList((IEnumerable<Measure>) @ViewData["Measures"], "MeasureId", "MeasureName"))" class="form-control"></select>
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Spremi</button>
+        <a asp-action="Index">
+            <button type="button" class="btn btn-secondary">Odustani</button>
+        </a>
+    </div>
+
+
+</form>
+
+<style>
+    #da {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+</style>

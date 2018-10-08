@@ -1,0 +1,64 @@
+﻿@model Medication
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail"  >
+        <img src=@Model.ImagePath id="lol" />
+        <div class="caption">
+            @if (User.IsInRole("Admin"))
+            {
+                if (Model.Quantity < 5 || Model.DateExpires <= DateTime.Now)
+                {
+                    <h3 class="pull-right">
+                        <a asp-controller="Drug" asp-action="Edit"
+                           asp-route-id="@Model.DrugId"><img class="pull-right" src="~/images/warning.png" alt="" width="35" height="35" /></a>
+                    </h3>
+
+                }
+
+            }
+            else if (User.IsInRole("User"))
+            {
+                    <div>
+                        <h3 class="pull-right">
+                            <a asp-controller="Cart" asp-action="AddToCart"
+                               asp-route-drugId="@Model.DrugId"><img class="pull-right" src="~/images/cart.png" alt="" width="35" height="35" /></a>
+                        </h3>
+                    </div>
+                
+
+            }
+            else if (!User.Identity.IsAuthenticated)
+            {
+                <h3 class="pull-right">
+                    <a asp-controller="Account" asp-action="Login"
+                       ><img class="pull-right" src="~/images/cart.png" alt="" width="35" height="35" /></a>
+                </h3>
+            }
+                <h4 id="max">
+                    <a asp-controller="Drugs" asp-action="Show" asp-route-id="@Model.DrugId">@Model.DrugName @Model.Package.IndividualSize@Model.Package.Measure.MeasureName</a>
+                    @if (Model.Currency.CurrencyName == "HRK")
+                    {
+                    <h4><b>@Model.Price.ToString() kn</b></h4>
+
+                                    }
+                    else
+                    {
+                        <b>@Model.Price.ToString()@Model.Currency.CurrencyName.ToString()</b>
+
+
+
+                    }
+                </h4>
+        </div>
+    </div>
+</div>
+
+<style>
+    #lol{
+        height:200px
+    }
+    #max {
+        font-size: 25px;
+    }
+</style>
+

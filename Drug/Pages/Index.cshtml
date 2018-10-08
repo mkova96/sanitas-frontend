@@ -1,0 +1,31 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<body>
+    <div class="jumbotron jumbotron-fluid" style="min-height: 100vh; background-image: url(/images/xd.jpg); background-size: cover">
+        <div class="container">
+            <div style="display: flex; justify-content: center">
+                <p class="lead">
+                    <div style="position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%)">
+                        <a asp-controller="Drugs" asp-action="Index" class="btn btn-success btn-lg" role="button">
+                            Istraži
+                        </a>
+                        <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-lg" role="button">
+                            Registriraj se
+                        </a>
+                    </div>
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+</body>

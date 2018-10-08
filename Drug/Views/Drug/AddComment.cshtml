@@ -1,0 +1,34 @@
+﻿@model DrugData.Models.ViewModels.CommentViewModel
+
+<form asp-action="CreateComment" asp-route-id="@Model.Drug.DrugId" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <h2>Komentar</h2>
+
+    <div class="form-group">
+        <label asp-for="Content">Sadržaj</label>
+        <input type="text" required="" oninvalid="this.setCustomValidity('Unesite komentar')"
+ oninput="setCustomValidity('')" id="da" class="form-control" asp-for="Content">
+        @*<input asp-for="Content" id="da" class="form-control" />*@
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Spremi</button>
+        <a asp-controller="Drugs" asp-action="Show" asp-route-id="@Model.Drug.DrugId">
+    <button type="button" class="btn btn-secondary">Odustani</button>
+</a>
+    </div>
+
+</form>
+
+<style>
+    #da {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        margin-left: 35px display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+</style>
+

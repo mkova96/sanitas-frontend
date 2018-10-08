@@ -1,0 +1,26 @@
+﻿<li class="dropdown">
+    <a asp-controller="Manufacturers"
+       asp-action="Index"
+       class="dropdown-toggle" data-toggle="dropdown">Proizvođači<b class="caret"></b></a>
+    <ul class="dropdown-menu" id="robo">
+        @foreach (var category in Model)
+        {
+            <li>
+                <a asp-controller="Manufacturers" asp-action="Index"
+                   asp-route-category="@category">@category</a>
+            </li>
+        }
+        <li>
+            <a asp-controller="Manufacturers" asp-action="Index" asp-route-category="">Svi proizvođači</a>
+        </li>
+    </ul>
+</li>
+
+<style>
+
+
+    #robo {
+        height: auto !important;
+        overflow: visible !important;
+    }
+</style>
