@@ -20,3 +20,14 @@ C:\Users\MARIO\Drug\Drug\DrugData\obj\Debug\netcoreapp2.0\DrugData.AssemblyInfoI
 C:\Users\MARIO\Drug\Drug\DrugData\obj\Debug\netcoreapp2.0\DrugData.AssemblyInfo.cs
 C:\Users\MARIO\Drug\Drug\DrugData\obj\Debug\netcoreapp2.0\DrugData.dll
 C:\Users\MARIO\Drug\Drug\DrugData\obj\Debug\netcoreapp2.0\DrugData.pdb
+C:\Users\MARIO\sanitas---frontend\DrugData\bin\Debug\netcoreapp2.0\DrugData.deps.json
+C:\Users\MARIO\sanitas---frontend\DrugData\bin\Debug\netcoreapp2.0\DrugData.runtimeconfig.json
+C:\Users\MARIO\sanitas---frontend\DrugData\bin\Debug\netcoreapp2.0\DrugData.runtimeconfig.dev.json
+C:\Users\MARIO\sanitas---frontend\DrugData\bin\Debug\netcoreapp2.0\DrugData.dll
+C:\Users\MARIO\sanitas---frontend\DrugData\bin\Debug\netcoreapp2.0\DrugData.pdb
+C:\Users\MARIO\sanitas---frontend\DrugData\obj\Debug\netcoreapp2.0\DrugData.csprojAssemblyReference.cache
+C:\Users\MARIO\sanitas---frontend\DrugData\obj\Debug\netcoreapp2.0\DrugData.csproj.CoreCompileInputs.cache
+C:\Users\MARIO\sanitas---frontend\DrugData\obj\Debug\netcoreapp2.0\DrugData.AssemblyInfoInputs.cache
+C:\Users\MARIO\sanitas---frontend\DrugData\obj\Debug\netcoreapp2.0\DrugData.AssemblyInfo.cs
+C:\Users\MARIO\sanitas---frontend\DrugData\obj\Debug\netcoreapp2.0\DrugData.dll
+C:\Users\MARIO\sanitas---frontend\DrugData\obj\Debug\netcoreapp2.0\DrugData.pdb

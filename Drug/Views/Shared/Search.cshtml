@@ -7,6 +7,9 @@
 </div>
 
 <style>
+    *:focus { /*za sve klase nakon sto se pritisne na njih*/
+        outline: none;
+    }
     .search-container {
         float: right;
         margin-left: 25px;
@@ -17,6 +20,7 @@
         margin-top: 8px;
         font-size: 17px;
         border: none;
+        font-family: 'Lato', 'Arial', sans-serif;
     }
 
     .search-container button {
@@ -24,14 +28,15 @@
         padding: 6px 10px;
         margin-top: 8px;
         margin-right: 16px;
-        background: #ddd;
+        background: #fff;
         font-size: 17px;
         border: none;
         cursor: pointer;
+        font-family: 'Lato', 'Arial', sans-serif;
     }
 
         .search-container button:hover {
-            background: #ccc;
+            background: #fff;
         }
 
     media screen and (max-width: 600px) {

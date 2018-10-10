@@ -2,30 +2,73 @@
     ViewData["Title"] = "Početna stranica";
 }
 <!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/css/Unreg1.css">
+    <link rel="stylesheet" type="text/css" href="~/css/038%20Grid.css"> <!--grid preuzet s: http://www.responsivegridsystem.com/-->
+    <link rel="stylesheet" type="text/css" href="~/css/ionicons.min.css"><!--ikone preuzete sa ioicons.com-->
+    <link rel="stylesheet" type="text/css" href="~/css/animate.css">
+
+</head>
 <body>
-        <div class="jumbotron jumbotron-fluid"   style="min-height: 100vh; background-image: url(/images/xd.jpg); background-size: cover">
-            <div class="container">
-                <div style="display: flex; justify-content: center">
-                    <p class="lead">
-                        <div style="position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%)">
-                            <a asp-controller="Drugs" asp-action="Index" class="btn btn-success btn-lg" role="button">
-                                Istraži
-                            </a>
-                            <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-lg" role="button">
-                                Registriraj se
-                            </a>
-                        </div>
-                    </p>
-                </div>
+    <header>
+        <div class="hero-text-box">
+            <h1>Vaše zdravlje </br>je na dohvatu ruke.</h1>
+            <a asp-controller="Account" asp-action="Register" class="btn btn-full">Registriraj se</a>
+            <a class="btn btn-ghost js--scroll-to-start" href="#">Istraži</a>
+        </div>
+    </header>
+    <section class="section-features js--section-features" id="features">
+        <div class="row">
+            <h2>
+                Živite zdravo i kvalitetno
+            </h2>
+            <p class="long-copy">
+                Dobrodošli u Sanitas online ljekarnu. Ljekarnu s dugogodišnjom tradicijom koja vam omogućuje kupnju svih potrebnih lijekova za samo par klikova.
+            </p>
+        </div>
+        <div class="row js--wp-1">
+            <div class="col span-1-of-3 box">
+                <!--IMA U ONOM GRID.CSS-->
+                <i class="ion-ios-pricetags-outline icon-big"></i> <!--ovako se dodaje ikona= pod klasu dodas naziv ikone sa te str-->
+                <h3>Raznovrstan izbor</h3>
+                <p>
+                    Sanitas ljekarna nudi raznovrstan izbor proizvoda koji su primjenjivi za veliki broj bolesti.
+                </p>
+                <a asp-controller="Drugs" asp-action="Index" class="btn btn-full ">Proizvodi</a>
+            </div>
+            <div class="col span-1-of-3 box">
+                <!--IMA U ONOM GRID.CSS-->
+                <i class="ion-ios-flask-outline icon-big"></i>
+                <h3>Poznati proizvođaci</h3>
+                <p>
+                    Sanitas ljekarna nudi brojne proizvode od svjetski poznatih proizvodaca, kao i proizvodaca iz Hrvatske.
+                </p>
+                <a asp-controller="Manufacturers" asp-action="Index" class="btn btn-full ">Proizvodaci</a>
+            </div>
+            <div class="col span-1-of-3 box">
+                <!--IMA U ONOM GRID.CSS-->
+                <i class="ion-ios-chatboxes-outline icon-big"></i>
+                <h3>Dostupni djelatnici</h3>
+                <p>
+                    Niste sigurni što vam treba? </br>Slobodno se javite našim djelatnicima koji su tu za vas.
+                </p>
+                <a asp-controller="Doctor" asp-action="List" class="btn btn-full ">Djelatnici</a>
             </div>
         </div>
+    </section>
+    <script src="~/js/unregScripts.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/lib/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+
 </body>
 </html>
 
+<script>
+    $('.js--scroll-to-start').click(function () {
+        $('html, body').animate({ scrollTop: $('.js--section-features').offset().top }, 1000);
+    });
+</script>

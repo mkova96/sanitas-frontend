@@ -1,0 +1,187 @@
+/*************BASIC SETUP************/
+
+/*************REUSABLE COMPONENTS************/
+.row {
+    max-width: 1140px;
+    /*margin: 0 auto 0 auto;*/ /*ISTOOOOO*/
+    margin: 0 auto; /*CENTRIRANJE ELEMENTA*/
+}
+
+section {
+    padding: 80px 0;
+    background-color: #f3f3f5;
+}
+
+.box { /*odnosi se na ove stupce s ikonama*/
+    padding: 1%;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    background-color: #fff;
+    color: #555;
+    font-family: 'Lato', 'Arial', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+}
+
+
+/*************HEADINGS************/
+
+h1, h2, h3 {
+    font-weight: 300;
+    text-transform: uppercase; /*UPPERCASE*/
+}
+
+h1 {
+    margin: 0;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 240%;
+    word-spacing: 4px;
+    letter-spacing: 1px;
+}
+
+h2 {
+    font-size: 180%;
+    word-spacing: 2px;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+h3 {
+    font-size: 110%;
+    margin-bottom: 23px;
+    font-weight: 400;
+}
+
+h2:after { /*NARANCASTA CRTA*/
+    display: block;
+    height: 2px;
+    background-color: #269017;
+    content: " ";
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+/*************PARAGRAPHS*************/
+
+.long-copy {
+    line-height: 145%;
+    width: 70%; /*nece biti centrirano vise pa se zato ovo ispod radi*/
+    margin-left: 15%;
+    padding-bottom: 35px;
+    padding-top: 20px;
+}
+
+.box p {
+    font-size: 100%;
+    line-height: 145%;
+    font-weight: 360;
+}
+
+    .box p:after { /*NARANCASTA CRTA*/
+        display: block;
+        height: 1px;
+        background-color: #269017;
+        content: " ";
+        width: 300px;
+        margin: 0px auto;
+        margin-top: 30px;
+        margin-bottom: 35px;
+    }
+
+.box a {
+    /*nece biti centrirano vise pa se zato ovo ispod radi*/
+    margin-left: 25%;
+}
+
+
+header {
+    background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)) /*POTAMNJIVANJE SLIKE*/,url(../images/business-care-clinic-1282308.jpg);
+    background-size: cover;
+    height: 100vh;
+    background-attachment: fixed;
+}
+
+.hero-text-box {
+    position: absolute;
+    width: 1140px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%); /*translatira 50% visine i sirine*/
+}
+
+/*************LINKS************/
+
+a:link, a:visited {
+    color: #269017;
+    text-decoration: none;
+    padding-bottom: 1px;
+    border-bottom: 1px solid #269017;
+    transition: border-bottom 0.2s, color 0.2s;
+}
+
+a:hover, a:active {
+    color: #555;
+    border-bottom: 1px solid transparent;
+}
+
+/*************BUTTONS************/
+
+.btn:link, .btn:visited {
+    display: inline-block;
+    padding: 10px 30px;
+    font-weight: 300;
+    text-decoration: none;
+    border-radius: 200px;
+    transition: background-color 0.2s, border 0.2s, color 0.2s; /*postepena promjena kad se predje misem*/
+}
+
+.btn-full:link, .btn-full:visited {
+    background-color: #269017;
+    border: 1px solid #269017;
+    color: #fff;
+    margin-right: 15px;
+}
+
+.btn-ghost:link,
+.btn-ghost:visited {
+    border: 1px solid #269017;
+    color: #fff;
+}
+
+.btn:hover,
+.btn:active {
+    background-color: #3b6124; /*kad se misem prednje preko njega*/
+}
+
+.btn-full:hover,
+.btn-full:active {
+    border: 1px solid #3b6124;
+}
+
+.btn-ghost:hover,
+.btn-ghost:active {
+    border: 1px solid #3b6124;
+    color: #fff;
+}
+
+/*************ICONS************/
+
+.icon-big {
+    font-size: 350%;
+    display: block;
+    color: #269017;
+    margin-bottom: 27px;
+}

@@ -1,112 +1,97 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+/*NOVO DODANO*/
+
+footer {
+    background-color: #333;
+    padding: 30px;
+    font-size: 80%;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+footer p {
+    color: #888;
+    margin-top: 5px;
 }
 
-/* Carousel */
-.carousel-caption p {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body, .container body-content {
+    background-color: #fff;
+    color: #555;
+    font-family: 'Lato', 'Arial', sans-serif;
     font-size: 20px;
-    line-height: 1.4;
+    font-weight: 300;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
+/*MAIN NAVI*/
+.main-nav {
+    float: right;
+    list-style: none; /*uklanja bulletse kod liste*/
+    
 }
 
-/* QR code generator */
-#qrCode {
-    margin: 15px;
+.main-nav li { /*li elementi unutar main-nav*/
+    display: inline-block;
+    margin-left: 40px;
 }
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
-}
-
-.custom-search {
-    width: 100%;
-    display: flex;
-}
-
-.custom-search-input {
-    flex: 1;
-}
-    /*
-Unutar custom-search-inputa je input.
-*/
-    .custom-search-input input.form-control {
-        width: 100%;
-        padding: 10px;
-    }
-
-.custom-search-button {
-    flex-shrink: 0;
-    margin-left: 10px;
-}
-
-    .custom-search-button button {
-        padding: 10px;
-    }
-/*############################################3*/
-#cartButton {
-    margin-right: 8px;
-}
-
-nav {
-    padding: 8px;
-}
-
-.loginForm {
-    margin: 10%;
-}
-
-.checkoutForm {
-    margin-top: 5%;
-}
-
-.orderForm {
-    margin-top: 5%;
-    border-radius: 20px;
-    border-style: solid;
-    border-color: #2fa4e7;
-}
-
-a.remove {
+.main-nav li a:link,
+.main-nav li a:visited {
+    padding: 8px 0;
+    color: #000;
     text-decoration: none;
+    text-transform: uppercase;
+    font-size: 90%;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.2s;
 }
 
-    a.remove:hover {
-        color: blue;
+    .main-nav li a:hover,
+    .main-nav li a:active {
+        border-bottom: 2px solid #269017;
     }
 
-.center_div {
-    margin: 0 auto;
-    width: 80% /* value of your choice which suits your alignment */
+.sticky {
+     position:fixed;/*element ostaje na istom mjestu neovisno o scrollanju*/
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 2px #efefef;
+    z-index: 9999; /*da uvijek bude na vrhu kod slojeva*/
 }
 
-.marginTop {
-    margin-top: 5%;
+.sticky .main-nav {
+    margin-top: 18px;
 }
 
-.marginTop1 {
-    margin-top: 2%;
+.sticky .main-nav li a:link,
+.sticky .main-nav li a:visited {
+    padding: 16px 0;
+    color: #555;
 }
 
-.formPullRightButton {
-    margin-right: 10px !important
+
+
+.sticky .logo-black {
+    display: block;
 }
 
-.carousel img {
-    min-width: 100%;
+.logo {
+    height: 100px;
+    width: auto;
+    float: left;
+    margin-top: 20px;
 }
+
+.logo-black {
+    height: 50px;
+    width: auto;
+    float: left;
+    margin: 5px 0;
+}
+

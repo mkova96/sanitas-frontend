@@ -3,60 +3,57 @@
 
 
 @if (SignInManager.IsSignedIn(User))
-{ <ul class="nav navbar-nav navbar-right">
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img src="~/images/user.png" alt="" width="22" height="22" /> Moj profil<span class="caret"></span></a>
-        <ul class="dropdown-menu" role="menu" id="robo">
-            <li><a asp-controller="Manage" asp-action="Index">Uredi profil</a></li>
-            <li><a asp-controller="Manage" asp-action="ChangePassword">Promijeni lozinku</a></li>
-            <li><a asp-controller="Message" asp-action="Index">Poruke</a></li>
-            <li>
-                <div id="poly">
-                    <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+{ 
+<li class="dropdown">
+    <button class="dropbtn"><i class="ion-ios-contact"></i></button>
+    <ul class="dropdown-content">
+        <li><a asp-controller="Manage" asp-action="Index">Uredi profil</a></li>
+        <li><a asp-controller="Manage" asp-action="ChangePassword">Promijeni lozinku</a></li>
+        <li><a asp-controller="Message" asp-action="Index">Poruke</a></li>
+        <li>
+            <div id="poly">
+                <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
 
-                        <button type="submit" class="btn btn-link nav-link"><text id="moly">Odjava</text></button>
-                    </form>
-                </div>
-                
+                    <button type="submit" class="btn-log-out"><text id="moly">Odjava</text></button>
+                </form>
+            </div>
 
-            </li>                
-        </ul>
-    </li>
+
+        </li>
+    </ul>
+</li>
+    
     @if (User.IsInRole("Admin"))
     {
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu" id="robo">
-                <li><a asp-controller="Drug" asp-action="Index">Proizvodi</a></li>
-                <li><a asp-controller="Doctor" asp-action="Index">Ljekarnici</a></li>
-                <li><a asp-controller="User" asp-action="Index">Korisnici</a></li>
-                <li><a asp-controller="Admin" asp-action="Index">Admini</a></li>
-                <li><a asp-controller="SideEffect" asp-action="Index">Nuspojave</a></li>
-                <li><a asp-controller="Disease" asp-action="Index">Bolesti</a></li>
-                <li><a asp-controller="Manufacturer" asp-action="Index">Proizvođači</a></li>
-                <li><a asp-controller="Currency" asp-action="Index">Valute</a></li>
-                <li><a asp-controller="Package" asp-action="Index">Pakiranja</a></li>
+<li class="dropdown">
+    <button class="dropbtn"><i class="ion-ios-contact"></i></button>
 
-
-            </ul>
-        </li>
+    <ul class="dropdown-content">
+        <li><a asp-controller="Drug" asp-action="Index">Proizvodi</a></li>
+        <li><a asp-controller="Doctor" asp-action="Index">Ljekarnici</a></li>
+        <li><a asp-controller="User" asp-action="Index">Korisnici</a></li>
+        <li><a asp-controller="Admin" asp-action="Index">Admini</a></li>
+        <li><a asp-controller="SideEffect" asp-action="Index">Nuspojave</a></li>
+        <li><a asp-controller="Disease" asp-action="Index">Bolesti</a></li>
+        <li><a asp-controller="Manufacturer" asp-action="Index">Proizvođači</a></li>
+        <li><a asp-controller="Currency" asp-action="Index">Valute</a></li>
+        <li><a asp-controller="Package" asp-action="Index">Pakiranja</a></li>
+    </ul>
+</li>
 
     }
     else if (User.IsInRole("Owner"))
     {
-        <li class="dropdown" >
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Vlasnik<span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu" id="robo">
-                <li><a asp-controller="Admin" asp-action="Index">Admini</a></li>
-            </ul>
-        </li>
+<li class="dropdown">
+    <button class="dropbtn"><i class="ion-ios-contact"></i></button>
+    <ul class="dropdown-content">
+        <li><a asp-controller="Admin" asp-action="Index">Admini</a></li>
+    </ul>
+</li>
 
     }
-
-
-</ul>  
 }
-    else
+    else /*PAZIIIIIIIIIIII*/
     {
     <ul class="nav navbar-nav navbar-right">
         <li class="nav-item"><a asp-controller="Account" asp-action="Register" class="nav-link">Registracija</a></li>
@@ -65,18 +62,75 @@
     }
 
     <style>
+        .dropbtn {
+            background-color: #fff;
+            color: #000;
+            font-family: 'Lato', 'Arial', sans-serif;
+            padding: 8px 0;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 90%;
+            border-bottom: 2px solid transparent;
+            transition: border-bottom 0.2s;
+            border: none;
+            font-weight: 300;
+        }
 
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
 
-        #robo {
-            height: auto !important;
-            overflow: visible !important;
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
         }
-        #poly{
-            padding:3px;
+
+            .dropdown-content a {
+                color: black;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #eeebeb;
+                }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
-        #moly {
-            font-size: 17px;
-            color: #f2f2f2;
-            
+
+        .dropdown:hover .dropbtn {
+            border-bottom: 2px solid #269017;
         }
+
+        i {
+            font-size: 250%;
+            color: #000;
+            margin-bottom: 10px;
+        }
+
+        .btn-log-out {
+            background-color: #fff;
+            color: #000;
+            font-family: 'Lato', 'Arial', sans-serif;
+            padding: 18px 0;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 90%;
+            border-bottom: 2px solid transparent;
+            transition: border-bottom 0.2s;
+            border: none;
+            font-weight: 300;
+            cursor: pointer;
+        }
+
+            .btn-log-out:hover {
+                border-bottom: 2px solid #269017;
+                background-color: #eeebeb;
+            }
     </style>
