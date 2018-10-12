@@ -1,47 +1,71 @@
 ﻿@model IEnumerable<Doctor>
 
-@foreach (var asset in @Model)
-{
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/css/StyleSheet.css">
+    <link rel="stylesheet" type="text/css" href="~/css/038%20Grid.css"> <!--grid preuzet s: http://www.responsivegridsystem.com/-->
+    <link rel="stylesheet" type="text/css" href="~/css/ionicons.min.css"><!--ikone preuzete sa ioicons.com-->
+    <link rel="stylesheet" type="text/css" href="~/css/animate.css">
 
-<div class="row">
-    <div class="column1">
-        <div>
-            <center><img src=@asset.ImagePath class="imageCell" height="150px" /></center>
+</head>
+<body>
+    <section class="section-1">
+        <div class="row">
+            <h2 class="naslov">
+                Djelatnici
+            </h2>
         </div>
-    </div>
-    <div class="column2">
-        <div>
-            <h4><b><center>@asset.FullName</center></b></h4>
-        </div>
-        <div>
-            <center>Obrazovanje: @asset.Education</center>
-        </div>
-        <h1></h1>
-        <div>
-            @if (Context.User.Identity.IsAuthenticated && !User.IsInRole("Owner") && !User.IsInRole("Doctor"))
-            {
-                <center><a class="btn btn-success" asp-controller="Message" asp-action="SendTo" asp-route-id="@asset.Id">Pošalji upit</a></center>
-            }
-            else if (!User.IsInRole("Owner")&& !User.IsInRole("Doctor"))
-            {
 
-                <center><a class="btn btn-success" asp-controller="Account" asp-action="Login">Pošalji upit</a></center>
 
-            }
-        </div>
-    </div>
-    <div class="column3">
-        <div>
-            <h5><b><center>O ljekarniku:</center></b></h5>
-        </div>
-        <div>
-            @asset.Biography
-        </div>
-    </div>
+        @foreach (var asset in @Model)
+        {
 
-</div>
+            <div class="row">
+                <div class="column1">
+                    <div>
+                        <center><img src=@asset.ImagePath class="imageCell" height="150px" /></center>
+                    </div>
+                </div>
+                <div class="column2">
+                    <div>
+                        <h4><b><center>@asset.FullName</center></b></h4>
+                    </div>
+                    <div>
+                        <center>Obrazovanje: @asset.Education</center>
+                    </div>
+                    <h1></h1>
+                    <div>
+                        @if (Context.User.Identity.IsAuthenticated && !User.IsInRole("Owner") && !User.IsInRole("Doctor"))
+                        {
+                            <center><a class="poruka" asp-controller="Message" asp-action="SendTo" asp-route-id="@asset.Id">Pošalji upit</a></center>
+                        }
+                        else if (!User.IsInRole("Owner") && !User.IsInRole("Doctor"))
+                        {
 
-}
+                            <center><a class="poruka" asp-controller="Account" asp-action="Login">Pošalji upit</a></center>
+
+                        }
+                    </div>
+                </div>
+                <div class="column3">
+                    <div>
+                        <h4><b><center>O ljekarniku:</center></b></h4>
+                    </div>
+                    <div>
+                        @asset.Biography
+                    </div>
+                </div>
+
+            </div>
+
+        }
+
+    </section>
+</body>
+</html>
 
 
 <style>
@@ -49,26 +73,21 @@
         box-sizing: border-box;
     }
 
-    /* Create two equal columns that floats next to each other */
-    .column {
+
+    .column1 {
         float: left;
-        width: 45%;
+        width: 30%;
         padding: 10px;
         height: 200px; /* Should be removed. Only for demonstration */
     }
 
-    .column1 {
-        float: left;
-        width: 20%;
-        padding: 10px;
-        height: 200px; /* Should be removed. Only for demonstration */
-    }
     .column2 {
         float: left;
-        width:25%;
+        width: 30%;
         padding: 10px;
         height: 200px; /* Should be removed. Only for demonstration */
     }
+
     .column3 {
         float: left;
         width: 40%;
@@ -82,4 +101,39 @@
         display: table;
         clear: both;
     }
+
+    h4 {
+        margin-bottom:12px;
+    }
+
+    .poruka:link, .poruka:visited {
+        display: inline-block;
+        padding: 4px 20px;
+        font-weight: 300;
+        text-decoration: none;
+        border-radius: 200px;
+        transition: background-color 0.2s, border 0.2s, color 0.2s; /*postepena promjena kad se predje misem*/
+    }
+
+    .poruka:link, .poruka:visited {
+        background-color: #269017;
+        border: 1px solid #269017;
+        color: #fff;
+        margin-right: 15px;
+        margin-top: 20px;
+    }
+
+
+
+    .poruka:hover,
+    .poruka:active {
+        background-color: #3b6124; /*kad se misem prednje preko njega*/
+    }
+
+    .poruka:hover,
+    .poruka:active {
+        border: 1px solid #3b6124;
+    }
+
+    
 </style>

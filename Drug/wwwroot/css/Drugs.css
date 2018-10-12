@@ -1,0 +1,66 @@
+﻿section {
+    padding: 80px 0;
+    background-color: #f3f3f5;
+}
+
+.row {
+    max-width: 1140px;
+    /*margin: 0 auto 0 auto;*/ /*ISTOOOOO*/
+    margin: 0 auto; /*CENTRIRANJE ELEMENTA*/
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    background-color: #fff;
+    color: #555;
+    font-family: 'Lato', 'Arial', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+}
+
+/*************HEADINGS************/
+
+h1, h2, h3 {
+    font-weight: 300;
+    text-transform: uppercase; /*UPPERCASE*/
+}
+
+h1 {
+    margin: 0;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 240%;
+    word-spacing: 4px;
+    letter-spacing: 1px;
+}
+
+h2 {
+    font-size: 180%;
+    word-spacing: 2px;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+h3 {
+    font-size: 110%;
+    margin-bottom: 23px;
+    font-weight: 400;
+}
+
+h2:after { /*NARANCASTA CRTA*/
+    display: block;
+    height: 2px;
+    background-color: #269017;
+    content: " ";
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 30px;
+}

@@ -1,61 +1,240 @@
 ﻿@inject UserManager<User> UserManager
-@{
-    ViewData["Title"] = "Poruke";
-}
 @model PaginatedList<DrugData.Models.Message>
-<h2>
-    Popis poruka
-    <a asp-action="Add" class="btn btn-primary btn-sm">Nova poruka</a>
-</h2>
-@if (@ViewData["Success"] != null)
-{
-    <div class="alert alert-success">Poruka poslana</div>
-}
-<ul class="list-group">
-    @if (!Model.Any())
-    {
-        <h5 style="color: #778899">Trenutno nema dodanih poruka.</h5>
-    }
-    @foreach (var m in Model)
-    {
-        <a asp-action="Show" asp-route-id="@m.MessageId" class="Messages__Message card">
-            <div class="card-body">
-                @if (@m.GetOtherUser(UserManager.GetUserId(User)).IsAdmin == true)
-                {
-                    <h5 class="card-title">Admin : @m.GetOtherUser(UserManager.GetUserId(User)).FullName</h5>
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/css/StyleSheet.css">
+    <link rel="stylesheet" type="text/css" href="~/css/038%20Grid.css"> <!--grid preuzet s: http://www.responsivegridsystem.com/-->
+    <link rel="stylesheet" type="text/css" href="~/css/ionicons.min.css"><!--ikone preuzete sa ioicons.com-->
+    <link rel="stylesheet" type="text/css" href="~/css/animate.css">
 
-                }
-                else if (@m.GetOtherUser(UserManager.GetUserId(User)).IsDoctor == true)
-                {
-                    <h5 class="card-title">Ljekarnik : @m.GetOtherUser(UserManager.GetUserId(User)).FullName</h5>
-                }
-                else if (@m.GetOtherUser(UserManager.GetUserId(User)).UserName == "sanitas@ljekarna.com")
-                {
-                    <h5 class="card-title">Ljekarna Sanitas</h5>
+</head>
+<body>
+    <section class="section-1">
+        <div class="row">
+            <h2 class="poruke">
+                Poruke
+            </h2>
+            <a asp-action="Add" class="comm">Nova poruka</a>
+        </div>
 
-                }
-                else
+        @if (@ViewData["Success"] != null)
+        {
+            <div class="alert alert-success">Poruka poslana</div>
+        }
+            <ul class="list-group">
+                @if (!Model.Any())
                 {
-                    <h5 class="card-title">Korisnik : @m.GetOtherUser(UserManager.GetUserId(User)).FullName:</h5>
+                    <h3 class="test" style="color: #778899">Trenutno nema dodanih poruka.</h3>
                 }
-                <h6 class="card-subtitle mb-2 text-muted">@m.MessageDate.ToString("dd. MMM. yyyy.")</h6>
-                <p class="card-text">@m.Body</p>
-            </div>
+                    <div class="col span-3-of-3">
+
+                        @foreach (var m in Model)
+                        {
+                            @*<a asp-action="Show" asp-route-id="@m.MessageId" class="Messages__Message card">*@
+                            <div class="row mess">
+                                <div class="col span-1-of-3">
+                                    @if (@m.GetOtherUser(UserManager.GetUserId(User)).IsAdmin == true)
+                                    {
+                                        <h5 class="card-title">Admin : @m.GetOtherUser(UserManager.GetUserId(User)).FullName</h5>
+
+                                    }
+                                    else if (@m.GetOtherUser(UserManager.GetUserId(User)).IsDoctor == true)
+                                    {
+                                        <h5 class="card-title">Ljekarnik : @m.GetOtherUser(UserManager.GetUserId(User)).FullName</h5>
+                                    }
+                                    else if (@m.GetOtherUser(UserManager.GetUserId(User)).UserName == "sanitas@ljekarna.com")
+                                    {
+                                        <h5 class="card-title">Ljekarna Sanitas</h5>
+
+                                    }
+                                    else
+                                    {
+                                        <h5 class="card-title">Korisnik : @m.GetOtherUser(UserManager.GetUserId(User)).FullName:</h5>
+                                    }
+                                    <h6 class="card-subtitle mb-2 text-muted">@m.MessageDate.ToString("dd. MMM. yyyy.")</h6>
+                                </div>
+                                <div class="col span-2-of-3">
+
+                                    <p class="card-text">@m.Body</p>
+                                </div>
+                                <div class="mek">
+                                    <div class="tritocke">
+                                        <i onclick="myFunction()" class="ion-ios-more trit"></i>
+                                        <div id="myDropdown" class="tritocke-content">
+                                            <a href="#home">Odgovori</a>
+                                            <a href="#about">Obriši</a>
+                                        </div>
+                                    </div>                                  
+                                </div>
+                            </div>
+                            @*</a>*@
+                        }
+                    </div>
+            </ul>
+        @{
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        }
+
+        <a asp-action="Index"
+           asp-route-page="@(Model.PageIndex - 1)"
+           class="btn btn-default @prevDisabled">
+            ◄
         </a>
-    }
-</ul>
-@{
-    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-}
+        <a asp-action="Index"
+           asp-route-page="@(Model.PageIndex + 1)"
+           class="btn btn-default @nextDisabled">
+            ►
+        </a>
+        </section>
+</body>
+</html>
 
-<a asp-action="Index"
-   asp-route-page="@(Model.PageIndex - 1)"
-   class="btn btn-default @prevDisabled">
-    ◄
-</a>
-<a asp-action="Index"
-   asp-route-page="@(Model.PageIndex + 1)"
-   class="btn btn-default @nextDisabled">
-    ►
-</a>
+<style>
+    .comm:link, .comm:visited {
+        display: inline-block;
+        padding: 6px 25px;
+        font-weight: 300;
+        text-decoration: none;
+        border-radius: 200px;
+        transition: background-color 0.2s, border 0.2s, color 0.2s; /*postepena promjena kad se predje misem*/
+        margin-bottom:60px;
+    }
+
+    .comm:link, .comm:visited {
+        background-color: #269017;
+        border: 1px solid #269017;
+        color: #fff;
+        margin-left: 490px;
+    }
+
+    .poruke {
+        font-size: 180%;
+        word-spacing: 2px;
+        text-align: center;
+        margin-bottom: 5px;
+        letter-spacing: 1px;
+        font-weight: 300;
+        text-transform: uppercase;
+    }
+
+    .poruke:after { /*NARANCASTA CRTA*/
+        display: block;
+        height: 2px;
+        background-color: #269017;
+        content: " ";
+        width: 100px;
+        margin: 0 auto;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    .test {
+        display:block;
+        margin-left:610px;
+        margin-right:auto;
+    }
+
+    .mess {
+        border: 1px solid #fff;
+        padding: 10px auto;
+        width: 60%;
+        height: 80px;
+        background-color: #fff;
+        margin-bottom:5px;
+        border-radius:10px;
+    }
+        .mess h5 {
+            margin: 7px 10px;
+        }
+        .mess h6{
+            margin-left:10px;
+            margin-right:10px;
+        }
+    
+
+    .Messages__Message {
+        text-decoration: none;
+        color: #000;
+    }
+
+    .mek {
+        margin-left:25px;
+        float:left;
+    }
+
+    .span-2-of-3 {
+        width: 55.13%;
+    }
+
+
+    .trit {
+        background-color: #fff;
+        color: black;
+        padding: 10px;
+        font-size: 46px;
+        border: none;
+        cursor: pointer;
+    }
+
+        .trit:hover, .trit:focus {
+            background-color: #fff;
+        }
+
+    .tritocke {
+        position: relative;
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    .tritocke-content {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        min-width: 160px;
+        overflow: auto;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .tritocke-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+    .tritocke a:hover {
+        background-color: #ddd;
+    }
+
+    .show {
+        display: block;
+    }
+</style>
+
+<script>
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function (event) {
+        if (!event.target.matches('.trit')) {
+
+            var dropdowns = document.getElementsByClassName("tritocke-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>

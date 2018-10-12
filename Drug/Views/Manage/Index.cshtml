@@ -1,49 +1,95 @@
 ﻿@model IndexViewModel
-    <h1>Uredi profil</h1>
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/css/StyleSheet.css">
+    <link rel="stylesheet" type="text/css" href="~/css/038%20Grid.css"> <!--grid preuzet s: http://www.responsivegridsystem.com/-->
+    <link rel="stylesheet" type="text/css" href="~/css/ionicons.min.css"><!--ikone preuzete sa ioicons.com-->
+    <link rel="stylesheet" type="text/css" href="~/css/animate.css">
 
-<div class="row">
-    <div class="col-md-6">
-        <form method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name"></label>
-                <input asp-for="Name" id="da" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Surname"></label>
-                <input asp-for="Surname" id="da"class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Email"></label>
-                    <input asp-for="Email" id="da" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Address"></label>
-                <input asp-for="Address" id="da" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="CityId">Grad</label>
-                <select asp-for="CityId" asp-items="@(new SelectList((IEnumerable<City>) @ViewData["Cities"],"CityId", "CityPbr"))" class="form-control"></select>
-            </div>
+</head>
+<body>
+    <section class="section-1">
+        <div class="row">
+            <h2 class="naslov">
+                Uredi profil
+            </h2>
+        </div>
+        <div class="row">
+            <form method="post" class="contact-form">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label asp-for="Name">Ime</label> <!--ovaj for spaja labelu s inputom kad se odabere-->
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input asp-for="Name" name="name" id="name" type="text" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label asp-for="Surname">Prezime</label> <!--ovaj for spaja labelu s inputom kad se odabere-->
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input asp-for="Surname" name="surname" type="text" id="surname" required>
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <b>Hrvatska</b>
-            </div>
-            <button type="submit" class="btn btn-primary">Spremi</button>
-        </form>
-    </div>
-</div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label asp-for="Email">Email</label> <!--ovaj for spaja labelu s inputom kad se odabere-->
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input asp-for="Email" type="email" name="email" id="email" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label asp-for="Address">Adresa</label> <!--ovaj for spaja labelu s inputom kad se odabere-->
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input asp-for="Address" name="address" type="text" id="address" required>
+                    </div>
+                </div>
 
-@section Scripts {
-@await Html.PartialAsync("_ValidationScriptsPartial")
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label asp-for="CityId">Grad</label> <!--ovaj for spaja labelu s inputom kad se odabere-->
+                    </div>
+                    <div class="col span-2-of-3">
+                        <select asp-for="CityId" id="cityid" name="cityid" asp-items="@(new SelectList((IEnumerable<City>) @ViewData["Cities"],"CityId", "CityPbr"))"></select>
+                    </div>
+                </div>
 
-}
+                <div class="form-group">
+                    <b>Hrvatska</b>
+                </div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label>&nbsp;</label>
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input type="submit" value="Spremi">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    </body>
+</html>
 
-<style>
-    #da {
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-</style>
+        @section Scripts {
+            @await Html.PartialAsync("_ValidationScriptsPartial")
+
+        }
+
+        <style>
+            #da {
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+        </style>
 

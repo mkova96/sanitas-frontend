@@ -1,51 +1,63 @@
 ﻿@model PaginatedList2<DrugData.Models.Medication>
 
-<div>
-    <text id="lol">Proizvodi </text>
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/css/StyleSheet.css">
+    <link rel="stylesheet" type="text/css" href="~/css/038%20Grid.css"> <!--grid preuzet s: http://www.responsivegridsystem.com/-->
+    <link rel="stylesheet" type="text/css" href="~/css/ionicons.min.css"><!--ikone preuzete sa ioicons.com-->
+    <link rel="stylesheet" type="text/css" href="~/css/animate.css">
 
-        <button class="dropdown" id="ppp">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><text>Filtriraj po bolesti</text><span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-                <form asp-controller="Drugs" asp-action="Index" method="get" style="text-align:center">
-                    @{
-
-                        HashSet
-                        <Disease>
-                            genres = new HashSet<Disease>
-                                ();
-                        foreach (var album in ViewBag.Model)
-                        {
-                            foreach (var genre in album.DrugDiseases)
-                            {
-                                genres.Add(genre.Disease);
-
-                            }
-
-                        }
-
-                        foreach (var g in genres.OrderBy(x => x.DiseaseName))
-                        {
-                            <li><input type="checkbox" name="diseases" value="@g.DiseaseName" />@g.DiseaseName</li>
-                        }
-                        <li class="divider"></li>
-
-                        <input type="submit" name="submit" value="Filtriraj" />
-                    }
-
-                </form>
+</head>
+<body>
+    <section class="section-1">
+        <div class="row proizvodi">
+            <h2 class="naslov">
+                Proizvodi
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col span-3-of-4">
+                @foreach (var drink in Model)
+                {
+                    @Html.Partial("DrugSummary", drink)
 
 
-            </ul>
-        </button>
-</div>
+                }
+            </div>
+            </div>
+</section>
+        </body>
+</html>
 
 
 
+        @{
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        }
 
-<div class="row marginTop" id="zz">
-    @foreach (var drink in Model)
-    {
-        @Html.Partial("DrugSummary", drink)
+        <a asp-action="Index"
+           asp-route-page="@(Model.PageIndex - 1)"
+           asp-route-currentCategory="@ViewData["CurrentCategory"]"
+           class="btn btn-default @prevDisabled">
+            ◄
+        </a>
+        <a asp-action="Index"
+           asp-route-page="@(Model.PageIndex + 1)"
+           asp-route-currentCategory="@ViewData["CurrentCategory"]"
+           class="btn btn-default @nextDisabled">
+            ►
+        </a>
+
+        <style>
+            .proizvodi {
+                display:block;
+                margin:0px auto;
+            }
+        </style>
 
         <script>
         $(document).ready(function() {
@@ -70,37 +82,3 @@
     });
 });
         </script>
-    }
-</div>
-
-
-
-@{
-    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-}
-
-<a asp-action="Index"
-   asp-route-page="@(Model.PageIndex - 1)"
-   asp-route-currentCategory="@ViewData["CurrentCategory"]"
-   class="btn btn-default @prevDisabled">
-    ◄
-</a>
-<a asp-action="Index"
-   asp-route-page="@(Model.PageIndex + 1)"
-   asp-route-currentCategory="@ViewData["CurrentCategory"]"
-   class="btn btn-default @nextDisabled">
-    ►
-</a>
-
-<style>
-    #mad {
-        display: inline-block;
-        margin: 0;
-    }
-    #lol {
-        font-size: 45px;
-    }
-
-
-</style>

@@ -1,41 +1,72 @@
 ﻿@model DrugData.Models.ViewModels.OrderViewModel
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/css/StyleSheet.css">
+    <link rel="stylesheet" type="text/css" href="~/css/038%20Grid.css"> <!--grid preuzet s: http://www.responsivegridsystem.com/-->
+    <link rel="stylesheet" type="text/css" href="~/css/ionicons.min.css"><!--ikone preuzete sa ioicons.com-->
+    <link rel="stylesheet" type="text/css" href="~/css/animate.css">
 
-<form asp-action="Checkout" method="post">
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <h2>
-        Podaci za slanje
-    </h2>
-    <div class="form-group">
-        <label asp-for="FirstName">Ime </label>
-        <input asp-for="FirstName" id="da"  class="form-control" />
+</head>
+<body>
+    <section class="section-1">
+        <div class="row">
+            <h2 class="naslov">
+                Podaci za slanje
+            </h2>
+        </div>
+        <form asp-action="Checkout" method="post" class="contact-form">
+            <div class="row">
+                <div class="col span-1-of-3">
+                    <label asp-for="FirstName">Ime</label> <!--ovaj for spaja labelu s inputom kad se odabere-->
+                </div>
+                <div class="col span-2-of-3">
+                    <input asp-for="FirstName" name="firstname" id="firstname" type="text" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col span-1-of-3">
+                    <label asp-for="LastName">Prezime</label> <!--ovaj for spaja labelu s inputom kad se odabere-->
+                </div>
+                <div class="col span-2-of-3">
+                    <input asp-for="LastName" name="lastname" id="lastname" type="text" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col span-1-of-3">
+                    <label asp-for="Address">Adresa</label> <!--ovaj for spaja labelu s inputom kad se odabere-->
+                </div>
+                <div class="col span-2-of-3">
+                    <input asp-for="Address" name="address" type="text" id="address" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col span-1-of-3">
+                    <label asp-for="ZipCode">Poštanski broj</label> <!--ovaj for spaja labelu s inputom kad se odabere-->
+                </div>
+                <div class="col span-2-of-3">
+                    <input asp-for="ZipCode" name="zipcode" id="zipcode" type="number" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col span-1-of-3">
+                    <label asp-for="CityName">Grad</label> <!--ovaj for spaja labelu s inputom kad se odabere-->
+                </div>
+                <div class="col span-2-of-3">
+                    <input asp-for="CityName" name="cityname" id="cityname" type="text" required>
+                </div>
+            </div>
 
-    </div>
-    <div class="form-group">
-        <label asp-for="LastName">Prezime </label>
-        <input asp-for="LastName" id="da"  class="form-control" />
-
-    </div>
-    <div class="form-group">
-        <label asp-for="Address">Adresa </label>
-        <input asp-for="Address" id="da"  class="form-control" />
-
-    </div>
-    <div class="form-group">
-        <label asp-for="ZipCode">Poštanski broj </label>
-        <input asp-for="ZipCode" id="da"  class="form-control" />
-
-    </div>
-    <div class="form-group">
-        <label asp-for="CityName">Grad </label>
-        <input asp-for="CityName" id="da"  class="form-control" />
-
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Email">E-mail</label>
-        <input asp-for="Email" id="da"  class="form-control" />
-
-    </div>
+            <div class="row">
+                <div class="col span-1-of-3">
+                    <label asp-for="Email">Email</label> <!--ovaj for spaja labelu s inputom kad se odabere-->
+                </div>
+                <div class="col span-2-of-3">
+                    <input asp-for="Email" type="email" name="email" id="email" required>
+                </div>
+            </div>
 
 
 
@@ -46,20 +77,31 @@
 
 
 
-    <div class="text-center">
-        <button type="submit" class="btn btn-primary">Spremi</button>
-        <a asp-controller="Cart" asp-action="Index">
-            <button type="button" class="btn btn-secondary">Odustani</button>
-        </a>
-    </div>
+            <div class="text-center">
+                <div class="col span-1-of-4">
+                    <label>&nbsp;</label>
+                </div>
+                <div class="col span-2-of-4">
+                    <input type="submit" value="Pošalji">
+                </div>
+                <div class="col span-2-of-4">
+                    <a asp-controller="Cart" asp-action="Index">
+                        <button type="button" class="btn btn-secondary">Odustani</button>
+                    </a>
+                </div>
+                
+            </div>
 
-</form>
+        </form>
+        </section>
+    </body>
+</html>
 
 
-<style>
-    #da {
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-</style>                       
+        <style>
+            #da {
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+        </style>

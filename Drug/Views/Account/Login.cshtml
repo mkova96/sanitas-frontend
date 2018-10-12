@@ -1,54 +1,77 @@
 ﻿@model LoginViewModel
 @inject SignInManager<User> SignInManager
-@{
-    ViewData["Title"] = "Prijava";
-}
-<h2>@ViewData["Title"]</h2>
-<section>
-    <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
-        <h4>Koristite lokalni račun za prijavu.</h4>
-        <hr />
-        <div asp-validation-summary="All" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="Email"></label>
-            <input asp-for="Email" id="da" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Password">Lozinka</label>
-            <input asp-for="Password" id="da" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <div class="checkbox">
-                <label asp-for="RememberMe">
-                    <input asp-for="RememberMe" />
-                    Zapamti me?
-                </label>
-            </div>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Prijava</button>
-        </div>
-        <div class="form-group">
-            <p>
-                <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Registriraj se kao novi korisnik</a>
-            </p>
-        </div>
-    </form>
-</section>
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/css/StyleSheet.css">
+    <link rel="stylesheet" type="text/css" href="~/css/038%20Grid.css"> <!--grid preuzet s: http://www.responsivegridsystem.com/-->
+    <link rel="stylesheet" type="text/css" href="~/css/ionicons.min.css"><!--ikone preuzete sa ioicons.com-->
+    <link rel="stylesheet" type="text/css" href="~/css/animate.css">
 
-@section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-}
-<style>
-    #da {
-        width: 35%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        margin-left: 35px display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-</style>
+</head>
+<body>
+    <section class="section-1">
+        <div class="row">
+            <h2 class="naslov">
+                Prijava
+            </h2>
+        </div>
+        <div class="row">
+            <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="contact-form">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label asp-for="Email">Email</label> <!--ovaj for spaja labelu s inputom kad se odabere-->
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input asp-for="Email" type="email" name="email" id="email" required>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label asp-for="Password">Lozinka</label> <!--ovaj for spaja labelu s inputom kad se odabere-->
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input asp-for="Password" type="password" name="password" id="password" required>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="checkbox">
+                        <label asp-for="RememberMe">
+                            <input asp-for="RememberMe" />
+                            Zapamti me?
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label>&nbsp;</label>
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input type="submit" value="Prijavi se">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p>
+                        <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Registriraj se kao novi korisnik</a>
+                    </p>
+                </div>
+            </form>
+            </div>
+    </section>
+    </body>
+</html>
+
+        @section Scripts {
+            @await Html.PartialAsync("_ValidationScriptsPartial")
+        }
+        <style>
+           .form-group{
+               margin-top:30px;
+           }
+        </style>

@@ -1,64 +1,159 @@
 ﻿@model Medication
 
-<div class="col-sm-4 col-lg-4 col-md-4">
-    <div class="thumbnail"  >
-        <img src=@Model.ImagePath id="lol" />
-        <div class="caption">
-            @if (User.IsInRole("Admin"))
-            {
-                if (Model.Quantity < 5 || Model.DateExpires <= DateTime.Now)
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/css/038%20Grid.css"> <!--grid preuzet s: http://www.responsivegridsystem.com/-->
+    <link rel="stylesheet" type="text/css" href="~/css/ionicons.min.css"><!--ikone preuzete sa ioicons.com-->
+</head>
+<body>
+
+    <div class="col span-1-of-4 box">
+        <div class="dropdown drug">
+            <img src=@Model.ImagePath alt="lisbon" class="dropbtn">
+            <div class="dropdown-content">
+                <a asp-controller="Drugs" asp-action="Show" asp-route-id="@Model.DrugId">
+                    <h3>Više o proizvodu</h3>
+                </a>
+
+                @if (User.IsInRole("Admin"))
                 {
-                    <h3 class="pull-right">
-                        <a asp-controller="Drug" asp-action="Edit"
-                           asp-route-id="@Model.DrugId"><img class="pull-right" src="~/images/warning.png" alt="" width="35" height="35" /></a>
-                    </h3>
-
-                }
-
-            }
-            else if (User.IsInRole("User"))
-            {
-                    <div>
-                        <h3 class="pull-right">
-                            <a asp-controller="Cart" asp-action="AddToCart"
-                               asp-route-drugId="@Model.DrugId"><img class="pull-right" src="~/images/cart.png" alt="" width="35" height="35" /></a>
-                        </h3>
-                    </div>
-                
-
-            }
-            else if (!User.Identity.IsAuthenticated)
-            {
-                <h3 class="pull-right">
-                    <a asp-controller="Account" asp-action="Login"
-                       ><img class="pull-right" src="~/images/cart.png" alt="" width="35" height="35" /></a>
-                </h3>
-            }
-                <h4 id="max">
-                    <a asp-controller="Drugs" asp-action="Show" asp-route-id="@Model.DrugId">@Model.DrugName @Model.Package.IndividualSize@Model.Package.Measure.MeasureName</a>
-                    @if (Model.Currency.CurrencyName == "HRK")
+                    @if (Model.Quantity < 5 || Model.DateExpires <= DateTime.Now)
                     {
+                        <h3>
+                            <a asp-controller="Drug" asp-action="Edit"
+                               asp-route-id="@Model.DrugId"><h3>Uredi</h3></a>
+                        </h3>
+                    }
+                }
+                else if (User.IsInRole("User"))
+                {
+                    <a asp-controller="Cart" asp-action="AddToCart"
+                       asp-route-drugId="@Model.DrugId">
+                        <h3>Dodaj u košaricu</h3>
+                    </a>
+                }
+                else if (!User.Identity.IsAuthenticated)
+                {
+                    <a asp-controller="Account" asp-action="Login">
+                        <h3>Dodaj u košaricu</h3>
+                    </a>
+                }
+            </div>
+        </div>
+        <div class="caption">          
+            <h4>
+                <b>@Model.DrugName @Model.Package.IndividualSize@Model.Package.Measure.MeasureName</b>
+                @if (Model.Currency.CurrencyName == "HRK")
+                {
                     <h4><b>@Model.Price.ToString() kn</b></h4>
 
-                                    }
-                    else
-                    {
-                        <b>@Model.Price.ToString()@Model.Currency.CurrencyName.ToString()</b>
+                }
+                else
+                {
+                    <b>@Model.Price.ToString()@Model.Currency.CurrencyName.ToString()</b>
 
 
 
-                    }
-                </h4>
+                }
+            </h4>
         </div>
     </div>
-</div>
 
-<style>
-    #lol{
-        height:200px
-    }
-    #max {
-        font-size: 25px;
-    }
-</style>
+        <style>
+            .drug {
+                width: 200px;
+                height: 180px;
+                margin-bottom: 20px;
+                float: unset;
+                position: relative;
+                display: inline-block;
+            }
 
+            .drug-content {
+                display: none;
+                position: absolute;
+                background-color: #f1f1f1;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 998;
+            }
+
+                .drug-content a {
+                    color: black;
+                    padding: 12px 16px;
+                    text-decoration: none;
+                    display: block;
+                    float: right;
+                }
+
+                    .drug-content a:hover {
+                        background-color: #ddd;
+                    }
+
+            .drug:hover .drug-content {
+                display: block;
+            }
+
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            html, body {
+                background-color: #fff;
+                color: #555;
+                font-family: 'Lato', 'Arial', sans-serif;
+                font-size: 20px;
+                font-weight: 300;
+                text-rendering: optimizeLegibility;
+                overflow-x: hidden;
+            }
+
+            .box .dropdown img {
+                width: 230px;
+                height: 200px;
+            }
+            .box { /*odnosi se na ove stupce s ikonama*/
+                padding: 1%;
+                display: block;
+                position:center;
+            }
+
+            .span-1-of-4 {
+                width: 29.8%;
+                position:center;
+                display:block;
+            }
+
+            .box a:link, .box a:visited {
+                color: #000;
+                text-decoration: none;
+                                
+            }
+
+           .drug h3 {
+                text-transform: none; /*UPPERCASE*/
+                margin-bottom: 5px;
+                color:#000;
+            }
+
+            .icon-big {
+                font-size: 150%;
+                color: #000;
+                margin-bottom: 27px;
+            }
+
+            .caption {
+                margin-bottom: 5px;
+            }
+
+
+        </style>
+
+</body>
+</html>
