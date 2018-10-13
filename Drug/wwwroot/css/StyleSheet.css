@@ -11,6 +11,7 @@
 .section-1 {
     padding: 80px 0;
     background-color: #f3f3f5;
+    min-height: 577px;
 }
 * {
     margin: 0;

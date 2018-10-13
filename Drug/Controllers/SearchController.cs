@@ -33,7 +33,7 @@ namespace Lijek.Controllers
 
             var searchLower = searchString.ToLower().Split(" ");
             var  drugs =
-                _databaseContext.Drug.Include(i => i.Package).ThenInclude(t => t.Measure).Where(c => searchForArray(c.DrugName.ToLower(), searchLower)).ToList();
+                _databaseContext.Drug.Include(o=>o.Currency).Include(i => i.Package).ThenInclude(t => t.Measure).Where(c => searchForArray(c.DrugName.ToLower(), searchLower)).ToList();
 
 
             var searchResults = new SearchActionViewModel

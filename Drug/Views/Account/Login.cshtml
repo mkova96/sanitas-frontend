@@ -8,11 +8,11 @@
     <link rel="stylesheet" type="text/css" href="~/css/StyleSheet.css">
     <link rel="stylesheet" type="text/css" href="~/css/038%20Grid.css"> <!--grid preuzet s: http://www.responsivegridsystem.com/-->
     <link rel="stylesheet" type="text/css" href="~/css/ionicons.min.css"><!--ikone preuzete sa ioicons.com-->
-    <link rel="stylesheet" type="text/css" href="~/css/animate.css">
+
 
 </head>
 <body>
-    <section class="section-1">
+    <section class="section-1 js--section-1">
         <div class="row">
             <h2 class="naslov">
                 Prijava
@@ -26,7 +26,7 @@
                         <label asp-for="Email">Email</label> <!--ovaj for spaja labelu s inputom kad se odabere-->
                     </div>
                     <div class="col span-2-of-3">
-                        <input asp-for="Email" type="email" name="email" id="email" required>
+                        <input class="other" asp-for="Email" type="email" name="email" id="email" required>
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                         <label asp-for="Password">Lozinka</label> <!--ovaj for spaja labelu s inputom kad se odabere-->
                     </div>
                     <div class="col span-2-of-3">
-                        <input asp-for="Password" type="password" name="password" id="password" required>
+                        <input class="other" asp-for="Password" type="password" name="password" id="password" required>
                         <span asp-validation-for="Password" class="text-danger"></span>
 
                     </div>
@@ -53,7 +53,7 @@
                         <label>&nbsp;</label>
                     </div>
                     <div class="col span-2-of-3">
-                        <input type="submit" value="Prijavi se">
+                        <input class="other" type="submit" value="Prijavi se">
                     </div>
                 </div>
                 <div class="form-group">
@@ -75,3 +75,12 @@
                margin-top:30px;
            }
         </style>
+        <script>
+            /*STICKY NAVIGATION*/
+            $('section-1').waypoint(function (direction) {
+                $('nav').addClass('sticky');
+            }, {
+                    offset: '60px;'
+                });
+
+        </script>

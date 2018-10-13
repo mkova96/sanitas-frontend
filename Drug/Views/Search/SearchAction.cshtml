@@ -1,29 +1,60 @@
-﻿@{
-    ViewData["Title"] = "Rezultati pretrage";
-}
-@model SearchActionViewModel
-<h1>Rezultati</h1>
-<hr />
+﻿@model SearchActionViewModel
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/css/StyleSheet.css">
+    <link rel="stylesheet" type="text/css" href="~/css/038%20Grid.css"> <!--grid preuzet s: http://www.responsivegridsystem.com/-->
+    <link rel="stylesheet" type="text/css" href="~/css/ionicons.min.css"><!--ikone preuzete sa ioicons.com-->
 
-@if (Model != null && Model.Drugs.Any())
-{
-    <ul class="list-group">
 
-        @if (Model.Drugs != null && Model.Drugs.Any())
+</head>
+<body>
+    <section class="section-1 js--section-1">
+        <div class="row">
+            <h2 class="naslov">
+                Rezultati pretrage
+            </h2>
+        </div>
+        @if (Model != null && Model.Drugs.Any())
         {
-            foreach (var c in Model.Drugs)
-            {
-        <h4>
-            <a asp-controller="Drugs" asp-action="Show" asp-route-id="@c.DrugId">
-                @c.DrugName @c.Package.IndividualSize@c.Package.Measure.MeasureName
-            </a>
-        </h4>
-                
-            }
+            <div class="row">
+                <div class="col span-3-of-4">
+                        @foreach (var c in Model.Drugs)
+                        {
+                            @Html.Partial("DrugSummary", c)
+
+                        }
+                    }
+                    </div>
+                </div>
+                }
+                else
+                {
+                    <div class="row">
+                        <h3>Nema rezultata o postavljenom upitu.</h3>
+                    </div>
+                }
+</section>
+    </body>
+</html>
+
+<style>
+    .pretrazeno{
+        list-style:none;
+    }
+
+        .pretrazeno li {
+            margin: 20px auto;
         }
-    </ul>
-}
-else
-{
-    <h4>Nema rezultata o postavljenom upitu.</h4>
-}
+
+
+        section{
+            min-height:1px;
+        }
+    .span-3-of-4 {
+        width: 90%;
+    }
+</style>
+        

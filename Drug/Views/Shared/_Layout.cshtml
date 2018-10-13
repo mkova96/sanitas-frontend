@@ -7,6 +7,7 @@
     <!--<link href="~/Search.css" rel="stylesheet" />-->
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" type="text/css" href="~/css/site.css">
+
     <title>Ljekarna Sanitas</title>
 </head>
 
@@ -19,7 +20,6 @@
                 @await Component.InvokeAsync("ManufacturerMenu")
                 <li><a asp-controller="Doctor" asp-action="List">Djelatnici</a></li>
                 @await Html.PartialAsync("Search")
-
                 @await Html.PartialAsync("_LoginPartial")
                 @await Component.InvokeAsync("CartSummary")
             </ul>
@@ -51,6 +51,13 @@
     /*STICKY NAVIGATION*/
     $('header').waypoint(function (direction) {
             $('nav').addClass('sticky');
+    }, {
+            offset: '60px;'
+        });
+
+    /*STICKY NAVIGATION*/
+    $('section').waypoint(function (direction) {
+        $('nav').addClass('sticky');
     }, {
             offset: '60px;'
         });

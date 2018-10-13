@@ -59,32 +59,29 @@
             </div>
 
         }
-
+        @{
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        }
+        <div class="row dalje">
+            <a asp-action="Index"
+               asp-route-page="@(Model.PageIndex - 1)"
+               asp-route-currentCategory="@ViewData["CurrentCategory"]"
+               class="strelica prva @prevDisabled">
+                ◄
+            </a>
+            <a asp-action="Index"
+               asp-route-page="@(Model.PageIndex + 1)"
+               asp-route-currentCategory="@ViewData["CurrentCategory"]"
+               class="strelica druga @nextDisabled">
+                ►
+            </a>
+        </div>
     </section>
 </body>
 </html>
 
   
-
-    @{
-        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-    }
-
-    <a asp-action="Index"
-       asp-route-page="@(Model.PageIndex - 1)"
-       asp-route-currentCategory="@ViewData["CurrentCategory"]"
-       class="btn btn-default @prevDisabled">
-        ◄
-    </a>
-    <a asp-action="Index"
-       asp-route-page="@(Model.PageIndex + 1)"
-       asp-route-currentCategory="@ViewData["CurrentCategory"]"
-       class="btn btn-default @nextDisabled">
-        ►
-    </a>
-
-
     <style>
         * {
             box-sizing: border-box;
@@ -130,6 +127,40 @@
         h4 {
             font-weight:400;
             margin-bottom:4px;
+        }
+
+        .strelica {
+            background-color: #f4f0f0;
+            font-size: 200%;
+            text-decoration: none;
+            color: #808080;
+        }
+
+            .strelica.disabled,
+            .strelica[disabled],
+            fieldset[disabled] .strelica {
+                cursor: not-allowed;
+                opacity: 0.65;
+                filter: alpha(opacity=65);
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+
+        a.strelica.disabled,
+        fieldset[disabled] a.strelica {
+            pointer-events: none;
+        }
+
+        .dalje {
+            position: absolute;
+        }
+
+        .prva {
+            margin-left: 300px;
+        }
+
+        .druga {
+            margin-left: 750px;
         }
 
     </style>

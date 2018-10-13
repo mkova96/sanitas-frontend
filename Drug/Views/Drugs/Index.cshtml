@@ -24,38 +24,80 @@
                 {
                     @Html.Partial("DrugSummary", drink)
 
-
+                    
                 }
             </div>
-            </div>
-</section>
-        </body>
-</html>
-
-
-
+        </div>
         @{
             var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
             var nextDisabled = !Model.HasNextPage ? "disabled" : "";
         }
+        <div class="row dalje">
+            <a asp-action="Index"
+               asp-route-page="@(Model.PageIndex - 1)"
+               asp-route-currentCategory="@ViewData["CurrentCategory"]"
+               class="strelica prva @prevDisabled">
+                ◄
+            </a> 
+            <a asp-action="Index"
+               asp-route-page="@(Model.PageIndex + 1)"
+               asp-route-currentCategory="@ViewData["CurrentCategory"]"
+               class="strelica druga @nextDisabled">
+                ►
+            </a>
+        </div>
+        
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-        <a asp-action="Index"
-           asp-route-page="@(Model.PageIndex - 1)"
-           asp-route-currentCategory="@ViewData["CurrentCategory"]"
-           class="btn btn-default @prevDisabled">
-            ◄
-        </a>
-        <a asp-action="Index"
-           asp-route-page="@(Model.PageIndex + 1)"
-           asp-route-currentCategory="@ViewData["CurrentCategory"]"
-           class="btn btn-default @nextDisabled">
-            ►
-        </a>
+</body>
+</html>
+
+
+
+        
 
         <style>
             .proizvodi {
                 display:block;
                 margin:0px auto;
+            }
+
+            .strelica {
+                background-color:#f4f0f0;
+                font-size:200%;
+                text-decoration:none;
+                color:#808080;
+            }
+
+            .strelica.disabled,
+            .strelica[disabled],
+            fieldset[disabled] .strelica {
+                cursor: not-allowed;
+                opacity: 0.65;
+                filter: alpha(opacity=65);
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+
+            a.strelica.disabled,
+            fieldset[disabled] a.strelica {
+                pointer-events: none;
+            }
+
+            .span-3-of-4{
+                width:90%;
+            }
+
+            .dalje {
+                position: absolute;
+            }
+            
+            .prva {
+                margin-left:200px;
+            }
+            .druga {
+                margin-left:800px;
             }
         </style>
 
