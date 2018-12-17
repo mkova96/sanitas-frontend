@@ -1,17 +1,80 @@
-﻿@{
-    ViewData["Title"] = "Pošalji poruku";
-}
-@model MessageViewModel
+﻿@model MessageViewModel
 
-<h1>Nova poruka</h1>
-<form asp-action="Create" method="post">
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="ReceiverId">Primatelj</label>
-        <select asp-for="ReceiverId" asp-items="@(new SelectList((IEnumerable<User>) @ViewData["Users"], "Id", "FullName"))" class="form-control"></select>
-    </div>
-    <div class="form-group">
-        <textarea class="form-control" asp-for="About" placeholder="Unesite poruku"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Pošalji</button>
-</form>
+
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/css/StyleSheet.css">
+    <link rel="stylesheet" type="text/css" href="~/css/038%20Grid.css"> <!--grid preuzet s: http://www.responsivegridsystem.com/-->
+    <link rel="stylesheet" type="text/css" href="~/css/ionicons.min.css"><!--ikone preuzete sa ioicons.com-->
+    <link rel="stylesheet" type="text/css" href="~/css/animate.css">
+
+</head>
+<body>
+    <section class="section-1">
+        <div class="row">
+            <h2 class="naslov">
+                Nova poruka
+            </h2>
+        </div>
+        <div class="row">
+
+            <form asp-action="Create" method="POST" class="contact-form">
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label asp-for="ReceiverId">Primatelj</label>
+                    </div>
+                    <div class="col span-2-of-3">
+                        <select asp-for="ReceiverId" asp-items="@(new SelectList((IEnumerable<User>) @ViewData["Users"], "Id", "FullName"))" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col span-3-of-3">
+                        <textarea class="form-control" asp-for="About" placeholder="Unesite poruku..."></textarea>
+                    </div>
+                </div>
+                <div class="row row-buttons">
+                    <div class="col span-1-of-4">
+                        <label>&nbsp;</label>
+                    </div>
+                    <div class="col span-1-of-4">
+                        <input type="submit" value="Pošalji">
+                    </div>
+                    <div class="col span-1-of-4 col-odustani">
+                        <a asp-controller="Message" asp-action="Index" class="odustani">Odustani</a>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </section>
+    </body>
+</html>
+
+
+<style>
+    .odustani {
+        padding: 8px 0;
+        color: #000;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 90%;
+        border-bottom: 2px solid transparent;
+        transition: border-bottom 0.2s;
+    }
+
+        .odustani:hover,
+        .odustani:active {
+            border-bottom: 2px solid #269017;
+        }
+
+    .row-buttons {
+        margin-top: 20px;
+        margin-left: 70px;
+    }
+
+    .col-odustani {
+        margin-top: 15px;
+    }
+</style>

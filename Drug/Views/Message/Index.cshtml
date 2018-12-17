@@ -24,72 +24,73 @@
         {
             <div class="alert alert-success">Poruka poslana</div>
         }
-            <ul class="list-group">
-                @if (!Model.Any())
+        <ul class="list-group">
+            @if (!Model.Any())
+            {
+                <h3 class="test" style="color: #778899">Trenutno nema dodanih poruka.</h3>
+            }
+            <div class="col span-3-of-3">
+
+                @foreach (var m in Model)
                 {
-                    <h3 class="test" style="color: #778899">Trenutno nema dodanih poruka.</h3>
-                }
-                    <div class="col span-3-of-3">
+                    @*<a asp-action="Show" asp-route-id="@m.MessageId" class="Messages__Message card">*@
+                    <div class="row mess">
+                        <div class="col span-1-of-3">
+                            @if (@m.GetOtherUser(UserManager.GetUserId(User)).IsAdmin == true)
+                            {
+                                <h5 class="card-title">Admin : @m.GetOtherUser(UserManager.GetUserId(User)).FullName</h5>
 
-                        @foreach (var m in Model)
-                        {
-                            @*<a asp-action="Show" asp-route-id="@m.MessageId" class="Messages__Message card">*@
-                            <div class="row mess">
-                                <div class="col span-1-of-3">
-                                    @if (@m.GetOtherUser(UserManager.GetUserId(User)).IsAdmin == true)
-                                    {
-                                        <h5 class="card-title">Admin : @m.GetOtherUser(UserManager.GetUserId(User)).FullName</h5>
+                            }
+                            else if (@m.GetOtherUser(UserManager.GetUserId(User)).IsDoctor == true)
+                            {
+                                <h5 class="card-title">Ljekarnik : @m.GetOtherUser(UserManager.GetUserId(User)).FullName</h5>
+                            }
+                            else if (@m.GetOtherUser(UserManager.GetUserId(User)).UserName == "sanitas@ljekarna.com")
+                            {
+                                <h5 class="card-title">Ljekarna Sanitas</h5>
 
-                                    }
-                                    else if (@m.GetOtherUser(UserManager.GetUserId(User)).IsDoctor == true)
-                                    {
-                                        <h5 class="card-title">Ljekarnik : @m.GetOtherUser(UserManager.GetUserId(User)).FullName</h5>
-                                    }
-                                    else if (@m.GetOtherUser(UserManager.GetUserId(User)).UserName == "sanitas@ljekarna.com")
-                                    {
-                                        <h5 class="card-title">Ljekarna Sanitas</h5>
+                            }
+                            else
+                            {
+                                <h5 class="card-title">Korisnik : @m.GetOtherUser(UserManager.GetUserId(User)).FullName</h5>
+                            }
+                            <h6 class="card-subtitle mb-2 text-muted">@m.MessageDate.ToString("dd. MMM. yyyy.")</h6>
+                        </div>
+                        <div class="col span-2-of-3">
 
-                                    }
-                                    else
-                                    {
-                                        <h5 class="card-title">Korisnik : @m.GetOtherUser(UserManager.GetUserId(User)).FullName:</h5>
-                                    }
-                                    <h6 class="card-subtitle mb-2 text-muted">@m.MessageDate.ToString("dd. MMM. yyyy.")</h6>
-                                </div>
-                                <div class="col span-2-of-3">
-
-                                    <p class="card-text">@m.Body</p>
-                                </div>
-                                <div class="mek">
-                                    <div class="tritocke">
-                                        <i onclick="myFunction()" class="ion-ios-more trit"></i>
-                                        <div id="myDropdown" class="tritocke-content">
-                                            <a href="#home">Odgovori</a>
-                                            <a href="#about">Obriši</a>
-                                        </div>
-                                    </div>                                  
+                            <p class="card-text">@m.Body</p>
+                        </div>
+                        <div class="mek">
+                            <div class="tritocke">
+                                <i onclick="myFunction()" class="ion-ios-more trit"></i>
+                                <div id="myDropdown" class="tritocke-content">
+                                    <a href="#home">Odgovori</a>
+                                    <a href="#about">Obriši</a>
                                 </div>
                             </div>
-                            @*</a>*@
-                        }
+                        </div>
                     </div>
-            </ul>
+                    @*</a>*@
+                }
+            </div>
+        </ul>
         @{
             var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
             var nextDisabled = !Model.HasNextPage ? "disabled" : "";
         }
-
-        <a asp-action="Index"
-           asp-route-page="@(Model.PageIndex - 1)"
-           class="btn btn-default @prevDisabled">
-            ◄
-        </a>
-        <a asp-action="Index"
-           asp-route-page="@(Model.PageIndex + 1)"
-           class="btn btn-default @nextDisabled">
-            ►
-        </a>
-        </section>
+        <div class="row dalje">
+            <a asp-action="Index"
+               asp-route-page="@(Model.PageIndex - 1)"
+               class="strelica prva @prevDisabled">
+                ◄
+            </a>
+            <a asp-action="Index"
+               asp-route-page="@(Model.PageIndex + 1)"
+               class="strelica druga @nextDisabled">
+                ►
+            </a>
+        </div>
+    </section>
 </body>
 </html>
 
@@ -213,6 +214,42 @@
 
     .show {
         display: block;
+    }
+
+
+    .strelica {
+        background-color: #f4f0f0;
+        font-size: 200%;
+        text-decoration: none;
+        color: #808080;
+    }
+
+        .strelica.disabled,
+        .strelica[disabled],
+        fieldset[disabled] .strelica {
+            cursor: not-allowed;
+            opacity: 0.65;
+            filter: alpha(opacity=65);
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+
+    a.strelica.disabled,
+    fieldset[disabled] a.strelica {
+        pointer-events: none;
+    }
+
+    .dalje {
+        position: inherit;
+        display:inline;
+    }
+
+    .prva {
+        margin-left: 335px;
+    }
+
+    .druga {
+        margin-left: 930px;
     }
 </style>
 

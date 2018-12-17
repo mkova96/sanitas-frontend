@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="~/css/ionicons.min.css"><!--ikone preuzete sa ioicons.com-->
     <link rel="stylesheet" type="text/css" href="~/css/animate.css">
 
+
 </head>
 <body>
     <section class="section-1">
@@ -21,9 +22,9 @@
 
             <table class="table table-bordered table-striped">
                 <thead>
-                    <tr>
+                    <tr class="redina">
                         <th>Količina</th>
-                        <th>Lijek</th>
+                        <th>Proizvod</th>
                         <th class="text-right">Cijena</th>
                         <th class="text-right">Ukupno</th>
                         <th></th>
@@ -34,37 +35,110 @@
                     {
                         <tr>
                             <td class="text-center">@line.Quantity</td>
-                            <td class="text-left">@line.Drug.DrugName</td>
+                            <td class="text-left"> @line.Drug.DrugName</td>
                             <td class="text-right">@line.Drug.Price HRK</td>
                             <td class="text-right">
                                 @((line.Quantity * line.Drug.Price)) HRK
                             </td>
-                            <td class="text-center"><a class="glyphicon glyphicon-remove text-danger remove" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-drugId="@line.Drug.DrugId"></a></td>
+                            <td class="text-center"><a class="glyphicon glyphicon-remove text-danger remove" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-drugId="@line.Drug.DrugId">X</a></td>
                         </tr>
                     }
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="3" class="text-right">Sveukupno:</td>
+                        <td colspan="3" class="text-right"><b>Sveukupno:</b></td>
                         <td class="text-right">
-                            @Model.CartTotal HRK
+                            <b>@Model.CartTotal HRK</b>
                         </td>
+                        <td></td>
                     </tr>
                 </tfoot>
             </table>
-            <div>
-                <div class="text-right">
-                    <div class="btn-group ">
-                        <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Dovrši kupnju</a>
-                    </div>
-                    <div class="btn-group pull-left ">
-                        <a class="btn btn-success" asp-controller="Drugs" asp-action="Index">Nastavi s kupnjom</a>
-                    </div>
-                </div>
-
-
+            <div class="row">
+                <a class="btn btn-full" asp-controller="Order" asp-action="Checkout">Dovrši kupnju</a>
+                <a class="btn btn-full nastavi" asp-controller="Drugs" asp-action="Index">Nastavi s kupnjom</a>
             </div>
         </div>
     </section>
-    </body>
+
+
+</body>
 </html>
+
+
+<style>
+    .table-bordered {
+        border: 1px solid #ddd;
+    }
+
+    .table {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+    .redina{
+        background-color:#dcd2d2;
+    }
+    table {
+        background-color: transparent;
+    }
+    .nastavi {
+        margin-left:705px;
+    }
+    tr {
+        height:45px;
+    }
+
+    table {
+        border-spacing: 0;
+        border-collapse: collapse;
+    }
+
+    .table > thead:first-child > tr:first-child > th {
+        border-top: 0;
+    }
+
+    .table-bordered > thead > tr > th {
+        border-bottom-width: 2px;
+    }
+    .table-bordered > thead > tr > th {
+        border: 1px solid #ddd;
+    }
+    .table > thead > tr > th {
+        vertical-align: bottom;
+    }
+    .table > thead > tr > th {
+        padding: 8px;
+        line-height: 1.42857143;
+    }
+    th {
+        text-align: left;
+    }
+    .text-right {
+        text-align: right;
+    }
+    th {
+        text-align: left;
+    }
+    .table-striped > tbody > tr:nth-of-type(odd) {
+        background-color: #f9f9f9;
+    }
+    .text-center {
+        text-align: center;
+    }
+    .text-left {
+        text-align: left;
+    }
+    .text-danger {
+        color: #a94442;
+    }
+
+    .glyphicon {
+        position: relative;
+        top: 1px;
+        display: inline-block;
+        font-style: normal;
+        font-weight: 900;
+        text-decoration:none;
+    }
+</style>

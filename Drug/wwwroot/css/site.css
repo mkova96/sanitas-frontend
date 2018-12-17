@@ -4,6 +4,8 @@ footer {
     background-color: #333;
     padding: 30px;
     font-size: 80%;
+    height: -webkit-fill-available;
+    max-height: 162px;
 }
 
 footer p {

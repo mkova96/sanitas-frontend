@@ -1,35 +1,89 @@
 ﻿@model DrugData.Models.ViewModels.EditManufacturerViewModel
 
-<form asp-action="Update" asp-route-id="@Model.ManufacturerId" method="post">
-    <div asp-validation-summary="All" class="text-danger"></div>
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/css/StyleSheet.css">
+    <link rel="stylesheet" type="text/css" href="~/css/038%20Grid.css"> <!--grid preuzet s: http://www.responsivegridsystem.com/-->
+    <link rel="stylesheet" type="text/css" href="~/css/ionicons.min.css"><!--ikone preuzete sa ioicons.com-->
+    <link rel="stylesheet" type="text/css" href="~/css/animate.css">
 
-    <h2>Uredi</h2>
-    <div class="form-group">
-        <label asp-for="ManufacturerName">Naziv </label>
-        <input asp-for="ManufacturerName" id="da" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="About">O proizvođaču </label>
-        <textarea asp-for="About" id="da" class="form-control"></textarea>
-    </div>
-    <div class="form-group">
-        <label asp-for="ImagePath">Poveznica na sliku </label>
-        <input asp-for="ImagePath" id="da" class="form-control" />
-    </div>
+</head>
+<body>
+    <section class="section-1">
+        <div class="row">
+            <h2 class="naslov">
+                Uredi
+            </h2>
+        </div>
+        <div class="row">
 
-    <div class="text-center">
-        <button type="submit" class="btn btn-primary">Spremi</button>
-        <a asp-action="Index">
-            <button type="button" class="btn btn-secondary">Odustani</button>
-        </a>
-    </div>
-
-</form>
+            <form asp-action="Update" asp-route-id="@Model.ManufacturerId" method="post" class="contact-form">
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label asp-for="ManufacturerName">Naziv </label>
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input asp-for="ManufacturerName" id="da" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label asp-for="About">O proizvodjacu </label>
+                    </div>
+                    <div class="col span-2-of-3">
+                        <textarea asp-for="About" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label asp-for="ImagePath">Poveznica na sliku </label>
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input asp-for="ImagePath" id="da" class="form-control" />
+                    </div>
+                </div>
+                <div class="row row-buttons">
+                    <div class="col span-1-of-4">
+                        <label>&nbsp;</label>
+                    </div>
+                    <div class="col span-1-of-4">
+                        <input type="submit" value="Spremi">
+                    </div>
+                    <div class="col span-1-of-4 col-odustani">
+                        <a asp-controller="Manufacturer" asp-action="Index" class="odustani">Odustani</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+</html>
 
 <style>
-    #da {
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
+    .odustani {
+        padding: 8px 0;
+        color: #000;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 90%;
+        border-bottom: 2px solid transparent;
+        transition: border-bottom 0.2s;
+    }
+
+        .odustani:hover,
+        .odustani:active {
+            border-bottom: 2px solid #269017;
+        }
+
+    .row-buttons {
+        margin-top: 20px;
+        margin-left: 70px;
+    }
+
+    .col-odustani {
+        margin-top: 15px;
     }
 </style>

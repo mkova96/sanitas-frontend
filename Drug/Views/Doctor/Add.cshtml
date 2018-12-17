@@ -2,61 +2,156 @@
     ViewData["Title"] = "Dodaj doktora";
 }
 @model DoctorViewModel
-<form asp-action="Create" method="POST">
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <h2>
-        Novi ljekarnik
-    </h2>
-    <div class="form-group">
-        <label asp-for="Name">Ime</label>
-        <input type="text" id="da" class="form-control" asp-for="Name">
-    </div>
-    <div class="form-group">
-        <label asp-for="Surname">Prezime</label>
-        <input type="text" id="da" class="form-control" asp-for="Surname">
-    </div>
-    <div class="form-group">
-        <label asp-for="EMail">E-Mail adresa</label>
-        <input type="text" id="da" class="form-control" asp-for="EMail">
-    </div>
-    <div class="form-group">
-        <label asp-for="Password">Lozinka</label>
-        <input type="password" class="form-control" asp-for="Password">
-    </div>
-    <div class="form-group">
-        <label asp-for="ConfirmPassword">Potvrdite lozinku</label>
-        <input asp-for="ConfirmPassword" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="ImagePath">Poveznica na sliku</label>
-        <input asp-for="ImagePath" id="da" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Address">Adresa</label>
-        <input asp-for="Address" id="da" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="CityId">Grad</label>
-        <select asp-for="CityId" asp-items="@(new SelectList((IEnumerable<City>) @ViewData["Cities"],"CityId", "CityPbr"))" class="form-control"></select>
-    </div>
 
-    <div class="form-group">
-        <b>Hrvatska</b>
-    </div>
-    <div class="form-group">
-        <label asp-for="About">O ljekarniku  </label>
-        <textarea asp-for="About" class="form-control"></textarea>
-    </div>
-    <div class="form-group">
-        <label asp-for="Education">Obrazovanje </label>
-        <input type="text" id="da" class="form-control" asp-for="Education">
-    </div>
 
-    <button type="submit" class="btn btn-primary">Dodaj</button>
-    <a asp-action="Index">
-        <button type="button" class="btn btn-secondary">Odustani</button>
-    </a>
-</form>
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/css/StyleSheet.css">
+    <link rel="stylesheet" type="text/css" href="~/css/038%20Grid.css"> <!--grid preuzet s: http://www.responsivegridsystem.com/-->
+    <link rel="stylesheet" type="text/css" href="~/css/ionicons.min.css"><!--ikone preuzete sa ioicons.com-->
+    <link rel="stylesheet" type="text/css" href="~/css/animate.css">
+
+</head>
+<body>
+    <section class="section-1">
+        <div class="row">
+            <h2 class="naslov">
+                Novi ljekarnik
+            </h2>
+        </div>
+        <div class="row">
+            <form asp-action="Create" method="POST" class="contact-form">
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label asp-for="Name">Ime</label> <!--ovaj for spaja labelu s inputom kad se odabere-->
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input asp-for="Name" name="name" id="diseasename" type="text" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label asp-for="Surname">Prezime</label> <!--ovaj for spaja labelu s inputom kad se odabere-->
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input asp-for="Surname" name="surname" id="surname" type="text" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label asp-for="EMail">E-mail adresa</label> <!--ovaj for spaja labelu s inputom kad se odabere-->
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input asp-for="EMail" name="email" id="email" type="text" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label asp-for="Password">Lozinka</label> <!--ovaj for spaja labelu s inputom kad se odabere-->
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input asp-for="Password" name="password" id="password" type="password" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label asp-for="ConfirmPassword">Potvrdite lozinku</label> <!--ovaj for spaja labelu s inputom kad se odabere-->
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input asp-for="ConfirmPassword" name="confirmpassword" id="confirmpassword" type="password" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label asp-for="ImagePath">Poveznica na sliku</label>
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input asp-for="ImagePath" id="da" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label asp-for="Address">Adresa</label>
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input asp-for="Address" id="da" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label asp-for="CityId">Grad</label>
+                    </div>
+                    <div class="col span-2-of-3">
+                        <select asp-for="CityId" asp-items="@(new SelectList((IEnumerable<City>) @ViewData["Cities"],"CityId", "CityPbr"))" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <b>Hrvatska</b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label asp-for="About">O ljekarniku  </label>
+                    </div>
+                    <div class="col span-2-of-3">
+                        <textarea asp-for="About" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label asp-for="Education">Obrazovanje </label>
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input type="text" id="da" class="form-control" asp-for="Education">
+                    </div>
+                </div>
+                <div class="row row-buttons">
+                    <div class="col span-1-of-4">
+                        <label>&nbsp;</label>
+                    </div>
+                    <div class="col span-1-of-4">
+                        <input type="submit" value="Spremi">
+                    </div>
+                    <div class="col span-1-of-4 col-odustani">
+                        <a asp-controller="Doctor" asp-action="Index" class="odustani">Odustani</a>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+</html>
+
+<style>
+    .odustani {
+        padding: 8px 0;
+        color: #000;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 90%;
+        border-bottom: 2px solid transparent;
+        transition: border-bottom 0.2s;
+    }
+
+        .odustani:hover,
+        .odustani:active {
+            border-bottom: 2px solid #269017;
+        }
+
+    .row-buttons {
+        margin-top: 20px;
+        margin-left: 70px;
+    }
+
+    .col-odustani {
+        margin-top: 15px;
+    }
+</style>
 
 <style>
     #da {

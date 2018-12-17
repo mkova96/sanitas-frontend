@@ -9,6 +9,9 @@
     <link rel="stylesheet" type="text/css" href="~/css/038%20Grid.css"> <!--grid preuzet s: http://www.responsivegridsystem.com/-->
     <link rel="stylesheet" type="text/css" href="~/css/ionicons.min.css"><!--ikone preuzete sa ioicons.com-->
     <link rel="stylesheet" type="text/css" href="~/css/animate.css">
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+
 
 </head>
 <body>
@@ -17,14 +20,49 @@
             <h2 class="naslov">
                 Proizvodi
             </h2>
+
         </div>
         <div class="row">
+            <button class="filter" id="ppp">
+                <a href="#" class="filter-toggle tekstic" data-toggle="dropdown" role="button" aria-expanded="false"><text class="tekst">Filtriraj po bolesti</text><span class="caret"></span></a>
+                <ul class="filter-menu" role="menu">
+                    <form asp-controller="Drugs" asp-action="Index" method="get" style="text-align:center" class="foe">
+                        @{
+
+                            HashSet
+                            <Disease>
+                                genres = new HashSet<Disease>
+                                    ();
+                            foreach (var album in ViewBag.Model)
+                            {
+                                foreach (var genre in album.DrugDiseases)
+                                {
+                                    genres.Add(genre.Disease);
+
+                                }
+
+                            }
+
+                            foreach (var g in genres.OrderBy(x => x.DiseaseName))
+                            {
+                                <li><input type="checkbox" name="diseases" value="@g.DiseaseName" />@g.DiseaseName</li>
+                            }
+                            <li class="divider"><hr /></li>
+
+                            <input type="submit" class="potvrda" name="submit" value="Filtriraj" />
+                        }
+
+                    </form>
+
+
+                </ul>
+            </button>
             <div class="col span-3-of-4">
                 @foreach (var drink in Model)
                 {
                     @Html.Partial("DrugSummary", drink)
 
-                    
+
                 }
             </div>
         </div>
@@ -38,7 +76,7 @@
                asp-route-currentCategory="@ViewData["CurrentCategory"]"
                class="strelica prva @prevDisabled">
                 ◄
-            </a> 
+            </a>
             <a asp-action="Index"
                asp-route-page="@(Model.PageIndex + 1)"
                asp-route-currentCategory="@ViewData["CurrentCategory"]"
@@ -46,18 +84,133 @@
                 ►
             </a>
         </div>
-        
+
     </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+
 
 </body>
 </html>
 
 
-
-        
-
         <style>
+            .foe li{
+                margin:10px auto;
+            }
+            .tekstic {
+                text-decoration: none;
+                font-size: initial;
+                font-family: unset;
+                color:black;
+            }
+            element.style {
+    text-align: center;
+}
+            a:focus {
+                outline-offset: -2px;
+            }
+
+            a:hover, a:focus {
+                color: #000000;
+                text-decoration: none;
+            }
+            .filter-toggle:focus {
+                outline: 0;
+            }
+            .filter {
+                position: relative;
+                
+            }
+            .open > a {
+                outline: 0;
+            }
+            .filter {
+                position: relative;
+                display: inline-block;
+                height: 30px;
+                width: 150px;
+                margin-top:-50px;
+            }
+
+            .filter {
+                position: relative;
+                display: inline-block;
+                float: right;
+            }
+
+
+
+            .caret {
+                display: inline-block;
+                width: 0;
+                height: 0;
+                margin-left: 2px;
+                vertical-align: middle;
+                border-top: 4px dashed;
+                border-top: 4px solid \9;
+                border-right: 4px solid transparent;
+                border-left: 4px solid transparent;
+            }
+
+            .filter-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                z-index: 1000;
+                display: none;
+                float: left;
+                min-width: 160px;
+                padding: 5px 0;
+                margin: 2px 0 0;
+                font-size: 14px;
+                text-align: left;
+                list-style: none;
+                background-color: #fff;
+                -webkit-background-clip: padding-box;
+                background-clip: padding-box;
+                border: 1px solid #ccc;
+                border: 1px solid rgba(0, 0, 0, .15);
+                border-radius: 4px;
+                -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+            }
+            .open > .filter-menu {
+                display: block;
+            }
+
+
+            .potvrda {
+                font-size: 20px;
+            }
+
+            .potvrda {
+                border: 1px solid #3b6124;
+            }
+
+            .potvrda {
+                background-color: #269017;
+                border: 1px solid #269017;
+                color: #fff;
+                margin-right: 15px;
+            }
+
+            .potvrda {
+                display: inline-block;
+                padding: 10px 30px;
+                font-weight: 300;
+                text-decoration: none;
+                border-radius: 200px;
+                -webkit-transition: background-color 0.2s, border 0.2s, color 0.2s;
+                transition: background-color 0.2s, border 0.2s, color 0.2s;
+            }
+
+
+
+
+
+
             .proizvodi {
                 display:block;
                 margin:0px auto;

@@ -11,7 +11,7 @@
 .section-1 {
     padding: 80px 0;
     background-color: #f3f3f5;
-    min-height: 577px;
+    min-height: 641px;
 }
 * {
     margin: 0;
@@ -71,6 +71,7 @@ input[type=text], input[type=email], select, textarea,input[type=password], inpu
 
 textarea {
     height: 100px;
+    font-size: larger;
 }
 
 *:focus { /*za sve klase nakon sto se pritisne na njih*/
@@ -129,4 +130,42 @@ input[type=text], input[type=email], input[type=password], input[type=submit] {
 
 select {
     font-size: 20px;
+}
+
+
+/*STRELICE ZA NAPRIJED-NAZAD NA ADMINSKOM PANELU*/
+
+.admin_strelica {
+    background-color: #f4f0f0;
+    font-size: larger;
+    text-decoration: none;
+    color: #808080;
+}
+
+.admin_strelica.disabled,
+.admin_strelica[disabled],
+fieldset[disabled] .admin_strelica {
+    cursor: not-allowed;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+a.admin_strelica.disabled,
+fieldset[disabled] a.admin_strelica {
+    pointer-events: none;
+}
+
+.admin_dalje {
+    position: inherit;
+    display: inline;
+}
+
+.admin_prva {
+    margin-left: 278px;
+}
+
+.admin_druga {
+    margin-left: 1099px;
 }
